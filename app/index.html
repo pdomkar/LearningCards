@@ -1,43 +1,52 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html dir="ltr" ng-app="lCApp">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
+  <title>Learning Cards</title>
+  <meta name="description" content="Application for learning using cards">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+  <link href="app.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/headers.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/drawer.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/layout.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/lists.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/input_areas.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/buttons.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/confirm.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/switches.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/value_selector.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/building-blocks/style/seekbars.css" rel="stylesheet" type="text/css">
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/gaia-icons/gaia-icons.js"></script>
+  <script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="js/mespeak/mespeak.js"></script>
+  <script src="services/IndexedDb.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="directives/directives.js"></script>
+  <script src="collections/collectionsDirectives.js"></script>
+  <script src="collections/collectionsList.js"></script>
+  <script src="cards/cardsList.js"></script>
+  <script src="collections/hidden/collectionsHidden.js"></script>
+  <script src="collection/hidden/cardsHidden.js"></script>
+  <script src="study/study.js"></script>
+  <script src="settings/settings.js"></script>
+  <script src="collectionSettings/collectionSettings.js"></script>
+  <script src="collection/collectionDetail.js"></script>
+
+  <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
+  <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
+  <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
+
+
+
+</head>
+<body>
+  <div ng-view></div>
 </body>
 </html>

@@ -13,7 +13,11 @@
     "jquery": "3.0.x",
     "bootstrap": "3.3.x",
     "jquery-mobile": "1.4.x",
-    "building-blocks": "1.3.x"
+    "building-blocks":"gh-pages",
+    "gaia-icons": "*",
+    "angular-bootstrap": "*",
+    "angular-ui": "*",
+    "moment": "2.10.x"
   },
   "resolutions": {
     "jquery": "3.0.x"

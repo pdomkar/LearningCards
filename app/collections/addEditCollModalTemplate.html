@@ -1,0 +1,17 @@
+<form role="dialog" data-type="confirm" name="addEditModal" class="addEditModal" ng-show='showModal' novalidate="">
+    <section>
+        <h1 ng-if="addEditCollModalMode == 'add'">Add collection</h1>
+        <h1 ng-if="addEditCollModalMode == 'update'">Update collection</h1>
+
+        <p>
+            <input type="text" placeholder="Name" data-ng-model="coll.name" required="" />
+            <input type="text" placeholder="Description" data-ng-model="coll.description"/>
+        </p>
+    </section>
+    <menu>
+        <button ng-click="cancel()">Cancel</button>
+        <button class="recommend" ng-click="add(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'add'">Add</button>
+        <button class="recommend" ng-click="update(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'update'">Update</button>
+
+    </menu>
+</form>

@@ -1,0 +1,46 @@
+<section role="region" data-ng-init="init()">
+    <header>
+        <menu type="toolbar">
+           <!--<a ng-click="showAddCardModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>-->
+           <!--<button ui-turn-on='menuOpt'><span class="icon icon-menu">show sidebar</span></button>-->
+        </menu>
+
+        <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
+        <h1>Cards</h1>
+    </header>
+
+    <section class="gaia-list fit scroll sticky">
+            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cl.cards" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
+
+               <div class="col-md-11">
+                   {{card.front}} | {{card.back}}
+                   <br />
+                    {{card.collectionId}}
+               </div>
+                <div class="col-md-1">
+                    <div ui-turn-on='cardOpt{{card.id}}' class='btn'>
+                        <i class="fa fa-ellipsis-v"></i>
+                    </div>
+                    <ul
+                            ui-state="cardOpt{{card.id}}"
+
+                            class="dropdown-menu"
+                            ui-outer-click="Ui.turnOff('cardOpt' + card.id)"
+                            ui-outer-click-if="Ui.active('cardOpt' + card.id)"
+                            role="menu"
+                            ui-show="cardOpt{{card.id}}"
+                            ui-turn-off="cardOpt{{card.id}}">
+
+                        <li><a ng-click="showUpdateCardModal(card.id)">Update</a></li>
+                        <li ng-show="(card.hidden.toLowerCase() == 'false')"><a ng-click="hide(card)">Hide</a></li>
+                        <li ng-show="(card.hidden.toLowerCase() == 'true')"><a ng-click="show(card)">Show</a></li>
+                        <li><a ng-click="callRemove(card.id)">Delete</a></li>
+                    </ul>
+                </div>
+
+            </div>
+      </section>
+</section>
+<add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>
+<confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>
+

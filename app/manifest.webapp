@@ -1,0 +1,20 @@
+{
+    "version":"0.1",
+	"name": "LearningCards1",
+    "description": "Application for learning using cards",
+    "launch_path": "/index.html",
+    "icons": {
+        "16": "/images/icon_016.png",
+        "32": "/images/icon_032.png",
+        "48": "/images/icon_048.png",
+        "128": "/images/icon_128.png"
+    },
+	"developer": {
+        "name": "Petr Domkař"
+    },
+    "default_locale": "en",
+	"type": "privileged",
+    "permissions": {
+        "systemXHR": { "description": "Required to make Ajax Calls over the Network" }
+    }
+}

@@ -1,0 +1,16 @@
+<form role="dialog" data-type="confirm" name="addEditModal" class="addEditModal" ng-show='showModal' novalidate="">
+    <section>
+        <h1 ng-if="addEditCardModalMode == 'add'">Add card</h1>
+        <h1 ng-if="addEditCardModalMode == 'update'">Update card</h1>
+        <p>
+            <input type="text" placeholder="Front side" data-ng-model="card.front" required />
+            <input type="text" placeholder="Back side" data-ng-model="card.back" required/>
+        </p>
+    </section>
+    <menu>
+        <button ng-click="cancel()">Cancel</button>
+        <button class="recommend" ng-click="add(card)" ng-disabled="addEditModal.$invalid" ng-if="addEditCardModalMode == 'add'">Add</button>
+        <button class="recommend" ng-click="update(card)" ng-disabled="addEditModal.$invalid" ng-if="addEditCardModalMode == 'update'">Update</button>
+
+    </menu>
+</form>

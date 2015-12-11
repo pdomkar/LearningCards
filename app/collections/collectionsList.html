@@ -1,0 +1,59 @@
+<section id="content" role="region" data-ng-init="init()">
+    <header>
+        <menu type="toolbar">
+            <a ng-click="showAddCollModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>
+            <button ui-turn-on='menuOpt'><span class="icon icon-menu">show sidebar</span></button>
+        </menu>
+
+        <ul
+                ui-state="menuOpt"
+
+                class="dropdown-menu"
+                ui-outer-click="Ui.turnOff('menuOpt' + collection.id)"
+                ui-outer-click-if="Ui.active('menuOpt')"
+                role="menu"
+                ui-show="menuOpt"
+                ui-turn-off="menuOpt">
+
+            <li><a ng-href="#/collections/hidden/" class="item">Display hidden collecction</a></li>
+            <li><a ng-href="#/cards/" class="item">Show all cards</a></li>
+            <li><a ng-href="#/settings/" class="item">Settings</a></li>
+            <li><a ng-href="#/filteredCollection/" class="item">Create filtered collection</a></li>
+            <li><a class="item">Statistics</a></li>
+        </ul>
+
+        <h1>Collections</h1>
+    </header>
+    <section class="gaia-list fit scroll sticky">
+
+       <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="collection in cl.collections">
+
+            <a ng-href="#/collections/{{collection.id}}"><div class="col-md-11">{{collection.name}}<br />{{collection.description}}</div></a>
+            <div class="col-md-1">
+            <div ui-turn-on='collectionOpt{{collection.id}}' class='btn'>
+            <i class="fa fa-ellipsis-v"></i>
+            </div>
+            <ul
+            ui-state="collectionOpt{{collection.id}}"
+
+            class="dropdown-menu"
+            ui-outer-click="Ui.turnOff('collectionOpt' + collection.id)"
+            ui-outer-click-if="Ui.active('collectionOpt' + collection.id)"
+            role="menu"
+            ui-show="collectionOpt{{collection.id}}"
+            ui-turn-off="collectionOpt{{collection.id}}">
+
+            <li><a ng-click="showUpdateCollModal(collection.id)">Update</a></li>
+            <li><a ng-click="hide(collection)">Hide</a></li>
+            <li><a ng-click="callRemove(collection.id);">Delete</a></li>
+            </ul>
+            </div>
+
+            </div>
+
+    </section>
+
+
+</section>
+<add-edit-coll-modal add-edit-coll-modal-mode="addEditCollModalMode" update-id="updateId" add-fce="add(newColl)" update-fce="update(newColl)" show-modal="showModal"></add-edit-coll-modal>
+<confirm-dialog title="Delete collection" body="Do you realy want to delete the collection?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCollId)" ></confirm-dialog>

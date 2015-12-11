@@ -1,0 +1,10 @@
+<form role="dialog" data-type="confirm" class="confirm" ng-show='showConfirm'>
+    <section>
+        <h1 ng-if="title !== undefined">{{title}}</h1>
+        <p>{{body || "Are you sure?"}}</p>
+    </section>
+    <menu>
+        <button ng-click="cancel()">{{btnCancel || "Cancel"}}</button>
+        <button class="danger" ng-click="confirm()">{{btnConfirm || "Confirm"}}</button>
+    </menu>
+</form>

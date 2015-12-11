@@ -1,0 +1,17 @@
+<section id="content" role="region" data-ng-init="init()">
+    <header>
+        <a ng-href="#/collections/{{collectionId}}"><span class="icon icon-back">Zpět</span></a>
+        <h1>Hidden cards</h1>
+    </header>
+    <section class="gaia-list fit scroll sticky">
+        <div class="row" ng-repeat="card in ch.cards">
+           <div class="col-md-11">{{card.front}} | {{card.back}}</div>
+            <div class="col-md-1">
+                <i data-icon="reload" aria-label="Show" ng-click="show(card)" class="pointer"></i>
+                <i data-icon="delete" aria-label="Delete" ng-click="callRemove(card.id)" class="pointer"></i>
+            </div>
+        </div>
+    </section>
+</section>
+<confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>
+

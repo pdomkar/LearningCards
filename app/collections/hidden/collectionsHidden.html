@@ -1,0 +1,17 @@
+<section id="content" role="region" data-ng-init="init()">
+    <header>
+        <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
+        <h1>Hidden collections</h1>
+    </header>
+    <section class="gaia-list fit scroll sticky">
+        <div class="row" ng-repeat="collection in ch.collections">
+           <div class="col-md-11">{{collection.name}}</div>
+            <div class="col-md-1">
+                <i data-icon="reload" aria-label="Show" ng-click="show(collection)" class="pointer"></i>
+                <i data-icon="delete" aria-label="Delete" ng-click="callRemove(collection.id)" class="pointer"></i>
+            </div>
+        </div>
+    </section>
+</section>
+<confirm-dialog title="Delete collection" body="Do you realy want to delete the collection?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCollId)" ></confirm-dialog>
+
