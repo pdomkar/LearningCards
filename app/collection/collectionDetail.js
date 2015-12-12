@@ -14,6 +14,8 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
     $scope.showModal = false;
     $scope.removeCardId = null;
     $scope.showConfirmRemove = false;
+    $scope.showFilteredNewColl = false;
+    $scope.filteredBaseCollId = null;
 
 
     $scope.showAddCardModal = function() {
@@ -25,6 +27,10 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
         $scope.updateId = id;
         $scope.addEditCardModalMode = "update";
         $scope.showModal = true;
+    };
+
+    $scope.showFilteredNewCollModal = function() {
+        $scope.showFilteredNewColl = true;
     };
 
 
@@ -121,6 +127,7 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
 
     $scope.init = function() {
         IndexedDb.open().then(function(){
+            $scope.filteredBaseCollId = $routeParams.id;
             $scope.getById($routeParams.id);
             $scope.refreshList();
         });

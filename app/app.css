@@ -18,6 +18,10 @@ form.addEditModal > section, form.confirm > section {
 	position:absolute;
 }
 
+form.addEditModal > section li {
+	color: #fff !important;
+}
+
 form.addEditModal > section > p > input[type="text"] {
 	color: #000;
 }
@@ -30,6 +34,7 @@ form.addEditModal > section > p > input[type="text"] {
 .addEditModal input.ng-valid.ng-touched {
 	border: 2px solid #78FA89;
 }
+
 
 ul.dropdown-menu li a.item {
 	display: block !important;

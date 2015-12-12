@@ -16,7 +16,7 @@
 
             <li><a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a></li>
             <li><a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a></li>
-            <li><a ng-href="#/filteredCollection/{{cd.collectionDetail.id}}/" class="item">Create filtered collection</a></li>
+            <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
             <li><a class="item">Statistics</a></li>
         </ul>
         <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
@@ -63,6 +63,7 @@
             </div>
       </section>
 </section>
+<filtered-new-coll-modal coll-id="filteredBaseCollId" show-filtered-new-coll-modal="showFilteredNewColl"></filtered-new-coll-modal>
 <add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>
 <confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>
 

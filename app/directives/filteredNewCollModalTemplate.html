@@ -1,0 +1,24 @@
+<form role="dialog" data-type="confirm" name="filteredNewCollModal" class="addEditModal" ng-show='showFilteredNewCollModal' novalidate="">
+    <section>
+        <h1 ng-if="collId == null">Create new collection from cards</h1>
+        <h1 ng-if="collId != null">Create new collection from collection</h1>
+        <p>
+            <input type="text" placeholder="Name" data-ng-model="filteredColl.name" required="" />
+            <input type="text" placeholder="Description" data-ng-model="filteredColl.description"/>
+            Select all: <input type="checkbox" name="checkAll" ng-model="checkAll" ng-change="selectDeselectAll(checkAll);" style="position:absolute; right:0px;">
+            <div id="item-list-container" class="item-list-scrollouter">
+                <article data-type="list">
+                    <ul id="item-list">
+                        <li ng-repeat="card in cards" data-id="{{card.id}}">
+                            {{card.front}} | {{card.back}}<input type="checkbox" name="filteredCards" style="position:absolute; right:0px;">
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </p>
+    </section>
+    <menu>
+        <button ng-click="cancel()">Cancel</button>
+        <button class="recommend" ng-click="create(filteredColl)" ng-disabled="filteredNewCollModal.$invalid">Create</button>
+    </menu>
+</form>

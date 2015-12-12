@@ -18,7 +18,7 @@
             <li><a ng-href="#/collections/hidden/" class="item">Display hidden collecction</a></li>
             <li><a ng-href="#/cards/" class="item">Show all cards</a></li>
             <li><a ng-href="#/settings/" class="item">Settings</a></li>
-            <li><a ng-href="#/filteredCollection/" class="item">Create filtered collection</a></li>
+            <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
             <li><a class="item">Statistics</a></li>
         </ul>
 
@@ -55,5 +55,6 @@
 
 
 </section>
+<filtered-new-coll-modal coll-id="null" show-filtered-new-coll-modal="showFilteredNewColl"></filtered-new-coll-modal>
 <add-edit-coll-modal add-edit-coll-modal-mode="addEditCollModalMode" update-id="updateId" add-fce="add(newColl)" update-fce="update(newColl)" show-modal="showModal"></add-edit-coll-modal>
 <confirm-dialog title="Delete collection" body="Do you realy want to delete the collection?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCollId)" ></confirm-dialog>

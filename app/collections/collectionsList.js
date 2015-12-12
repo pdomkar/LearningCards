@@ -12,6 +12,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
     $scope.showModal = false;
     $scope.removeCollId = null;
     $scope.showConfirmRemove = false;
+    $scope.showFilteredNewColl = false;
 
     $scope.showAddCollModal = function() {
         $scope.addEditCollModalMode = "add";
@@ -22,6 +23,10 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
         $scope.updateId = id;
         $scope.addEditCollModalMode = "update";
         $scope.showModal = true;
+    };
+
+    $scope.showFilteredNewCollModal = function() {
+        $scope.showFilteredNewColl = true;
     };
 
 
