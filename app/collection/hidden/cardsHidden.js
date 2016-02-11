@@ -13,7 +13,8 @@ cardsHidden.controller('CardsHiddenCtrl', ['$scope', '$routeParams', 'IndexedDb'
         IndexedDb.findByProperties(IndexedDb.STORES.CARD_STORE, {collectionId: parseInt($routeParams.id), hidden: "true"}).then(function(data){
             ch.cards=data;
         }, function(err){
-            $window.alert(err);
+            $window.apy
+            ert(err);
         });
     };
 

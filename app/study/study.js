@@ -9,6 +9,14 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
     $scope.card = null;
     $scope.displayAnswer = false;
 
+    const CARD_GRADE = { // PREMISTIt do definice konstatnt
+        0: 'Again',
+        1: 'Hard',
+        3: 'Good',
+        5: 'Easy'
+    };
+    $scope.CARD_GRADE = CARD_GRADE;
+
 
 
     $scope.showAnswer = function() {
@@ -63,6 +71,13 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
             $scope.card.numberOfIteration = 1;
             $scope.card.interval = 1;
         }
+        $scope.oldCardDirty = $scope.card.dirty;
+        if(grade == 0) {
+            $scope.card.dirty = "true";
+        } else {
+            $scope.card.dirty = "false";
+        }
+
         $scope.card.lastShow = moment().toDate();
         console.log("n of itera = " +  $scope.card.numberOfIteration);
         console.log("interval = " +  $scope.card.interval);
@@ -71,6 +86,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
 
 
         IndexedDb.update(IndexedDb.STORES.CARD_STORE, $scope.card).then(function() {
+            $scope.updateStatisticsAnswers(grade, $scope.oldCardDirty);
             $scope.loadStudyCard();
         }, function(err) {
             $window.alert(err);
@@ -100,6 +116,91 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
                 $location.path('/collections/' + $routeParams.id);
             });
         $scope.displayAnswer = false;
+    };
+
+    $scope.updateStatisticsAnswers = function(grade, dirty) {
+        var today = moment();
+        today.set({'hour': 0, 'minute': 0, 'second': 0});
+        today = today.format("YYYY-MM-DD");
+
+            //Pro statistiky globalní (bez kolekce) --------------------
+        IndexedDb.findByProperty(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, 'collectionId', 0 ).then(function(response) {
+            var record = null;
+            angular.forEach(response, function(value, key) {
+                if(moment(value.day).isSame(today, 'day')) {
+                    record = value;
+                }
+            });
+
+            if(record === null) { // neexistuje -> vytvořit
+                var newStatisticsToday = {
+                    day: today,
+                    collectionId: 0,
+                    again: 0, hard: 0, good: 0, easy: 0
+                };
+                if(dirty == "false") {
+                    newStatisticsToday[CARD_GRADE[grade].toLowerCase()] = 1;
+                }
+                IndexedDb.add(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, newStatisticsToday).then(function() {
+                    //ok
+                }, function(err) {
+                    $window.alert(err);
+                });
+            } else {    //existuje - melo by být jedno -> upravit grade
+                if(dirty == "false") {
+                    record[CARD_GRADE[grade].toLowerCase()] += 1;
+                }
+
+                IndexedDb.update(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, record).then(function() {
+                    //ok
+                }, function(err) {
+                    $window.alert(err);
+                });
+            }
+        }, function(err) {
+            $window.alert(err);
+        });
+
+
+
+
+            //Pro statistiky kolekci--------------------
+        IndexedDb.findByProperty(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, 'collectionId', $scope.collectionId ).then(function(response) {
+            var record = null;
+            angular.forEach(response, function(value, key) {
+                if(moment(value.day).isSame(today, 'day')) {
+                    record = value;
+                }
+            });
+
+            if(record === null) { // neexistuje -> vytvořit
+                var newStatisticsToday = {
+                    day: today,
+                    collectionId: $scope.collectionId,
+                    again: 0, hard: 0, good: 0, easy: 0
+                };
+                if(dirty == "false") {
+                    newStatisticsToday[CARD_GRADE[grade].toLowerCase()] = 1;
+                }
+                IndexedDb.add(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, newStatisticsToday).then(function() {
+                    //ok
+                }, function(err) {
+                    $window.alert(err);
+                });
+            } else {    //existuje - melo by být jedno -> upravit grade
+                if(dirty == "false") {
+                    record[CARD_GRADE[grade].toLowerCase()] += 1;
+                }
+                IndexedDb.update(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, record).then(function() {
+                    //ok
+                }, function(err) {
+                    $window.alert(err);
+                });
+            }
+        }, function(err) {
+            $window.alert(err);
+        });
+
     };
 
 

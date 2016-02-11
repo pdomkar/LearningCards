@@ -35,6 +35,64 @@ globalDirectives.directive('confirmDialog', function() {
             scope.card = {};
         };
 
+        scope.showImages = function() {
+            var finder = new Applait.Finder({ type: "pictures", caseSensitive: false });
+            finder.search("anikaja.jpg");
+            finder.on("searchBegin", function (needle) {
+                console.log("sdf");
+            });
+            finder.on("fileFound", function (file, fileinfo, storageName) {
+                console.log("Found file " + fileinfo.name + " at " + fileinfo.path + " in " + storageName, file);
+            });
+
+
+
+                var sdcard = navigator.getDeviceStorage('sdcard');
+
+                var request = sdcard.usedSpace();
+                request.onsuccess = function () {
+                    // The result is expressed in bytes, let's turn it into Gigabytes
+                    var size = this.result / Math.pow(10,9);
+
+                    console.log("The files on your SDCard take " + size.toFixed(2) + "GB of space.");
+                };
+                request.onerror = function () {
+                    console.warn("Unable to get the space used by the SDCard: " + this.error.name);
+                };
+
+                // Let's retrieve files from last week.
+                var param = {
+                    since: new Date((new Date()) - 12*4*7*24*60*60*1000)
+                };
+
+                var cursor = sdcard.enumerate();
+
+                cursor.onsuccess = function () {
+
+                    if (this.result) {
+                        var file = this.result;
+                        console.log("File updated on: " + file.name);
+
+                        // Once we found a file we check if there are other results
+                        // Then we move to the next result, which calls the cursor
+                        // success possibly with the next file as result.
+                        this.continue();
+                    } else {
+                        console.log("nothing");
+                    }
+                };
+
+            //var request = pics.get("December_2015_1920x1080.jpg");
+            //request.onsuccess = function () {
+            //    var file = this.result;
+            //    console.log("Get the file: " + file.name);
+            //}
+            //
+            //request.onerror = function () {
+            //    console.warn("Unable to get the file: " + this.error);
+            //}
+
+        };
         scope.add = function(card) {
             scope.addFce({newCard: card});
             scope.showModal = false;
@@ -142,6 +200,7 @@ globalDirectives.directive('confirmDialog', function() {
         scope.selectDeselectAll = function(checkAll) {
             $('input[name="filteredCards"]').prop('checked', checkAll);
         };
+
 
         scope.$watch('showFilteredNewCollModal', function(showFilteredNewCollModal) {
             if (showFilteredNewCollModal == true) {

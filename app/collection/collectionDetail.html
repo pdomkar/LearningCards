@@ -17,7 +17,7 @@
             <li><a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a></li>
             <li><a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a></li>
             <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
-            <li><a class="item">Statistics</a></li>
+            <li><a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" class="item">Statistics</a></li>
         </ul>
         <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
         <h1>{{cd.collectionDetail.name}}</h1>

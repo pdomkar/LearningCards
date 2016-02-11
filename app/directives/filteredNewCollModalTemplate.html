@@ -4,7 +4,7 @@
         <h1 ng-if="collId != null">Create new collection from collection</h1>
         <p>
             <input type="text" placeholder="Name" data-ng-model="filteredColl.name" required="" />
-            <input type="text" placeholder="Description" data-ng-model="filteredColl.description"/>
+            <input type="text" placeholder="Description" data-ng-model="filteredColl.description" />
             Select all: <input type="checkbox" name="checkAll" ng-model="checkAll" ng-change="selectDeselectAll(checkAll);" style="position:absolute; right:0px;">
             <div id="item-list-container" class="item-list-scrollouter">
                 <article data-type="list">

@@ -46,3 +46,23 @@ ul.dropdown-menu li a.item {
 	background: #999;
 	text-decoration: line-through;
 }
+
+.bb-tablist .bb-tabpanel {
+	position: absolute !important;
+	top: 100px !important;
+	right: 0 !important;
+	bottom: 4.5rem !important;
+	left: 0 !important;
+	 visibility: visible !important;
+	 overflow: visible !important;
+}
+
+.yellow {
+	background-color: #FFFF00;
+}
+.orange {
+	background-color: #FF9C08;
+}
+.red {
+	background-color: #FF0000;
+}

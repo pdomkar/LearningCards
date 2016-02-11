@@ -10,6 +10,8 @@ var learningCards = angular.module('lCApp', [
   'study',
   'settings',
   'collectionSettings',
+  'statistics',
+  'collectionStatistics',
   'IndexedDbServices',
   'globalDirectives'
 ]);
@@ -48,6 +50,14 @@ learningCards.config(['$routeProvider', '$compileProvider', function($routeProvi
     templateUrl: 'collectionSettings/collectionSettings.html',
     controller: 'CollectionSettingsCtrl',
     controllerAs: 'csc'
+  }).when('/statistics/', {
+    templateUrl: 'statistics/statistics.html',
+    controller: 'StatisticsCtrl',
+    controllerAs: 'stc'
+  }).when('/collectionStatistics/:id', {
+    templateUrl: 'collectionStatistics/collectionStatistics.html',
+    controller: 'CollectionStatisticsCtrl',
+    controllerAs: 'cstc'
   });
   $routeProvider.otherwise({redirectTo: '/collections'});
 

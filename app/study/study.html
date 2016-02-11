@@ -14,20 +14,20 @@
     <span>{{card.front}}</span>
     <hr ng-show="displayAnswer">
     <span ng-show="displayAnswer">{{card.back}}</span>
-    {{cards}}
+    <!--{{cards}}-->
 </div>
     </section>
     <footer role="toolbar" class="" style="position:fixed; width:100%; bottom:0px; min-height:50px;">
         <div class="row">
             <button ng-click="showAnswer()" class="col-xs-12" ng-show="!displayAnswer">Show answer</button>
             <div ng-show="displayAnswer">
-                <button ng-click="evaluateCard(0)" ng-if="card.interval < 6" class="col-xs-6">Again (<5min)</button>
-                <button ng-click="evaluateCard(5)" ng-if="card.interval < 6" class="col-xs-6">Good (1 day)</button>
+                <button ng-click="evaluateCard(0)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE.AGAIN}} (<5min)</button>
+                <button ng-click="evaluateCard(3)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE.GOOD}} (1 day)</button>
 
-                <button ng-click="evaluateCard(0)" ng-if="card.interval >= 6" class="col-xs-3">Again (<5min)</button>
-                <button ng-click="evaluateCard(1)" ng-if="card.interval >= 6" class="col-xs-3">Hard ({{card.interval*(1/3) | number:0}} days)</button>
-                <button ng-click="evaluateCard(3)" ng-if="card.interval >= 6" class="col-xs-3">Good ({{card.interval*(2/3) | number:0}} days)</button>
-                <button ng-click="evaluateCard(5)" ng-if="card.interval >= 6" class="col-xs-3">Easy ({{card.interval}} days)</button>
+                <button ng-click="evaluateCard(0)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE.AGAIN}} (<5min)</button>
+                <button ng-click="evaluateCard(1)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE.HARD}} ({{card.interval*(1/3) | number:0}} days)</button>
+                <button ng-click="evaluateCard(3)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE.GOOD}} ({{card.interval*(2/3) | number:0}} days)</button>
+                <button ng-click="evaluateCard(5)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE.EASY}} ({{card.interval}} days)</button>
             </div>
         </div>
     </footer>

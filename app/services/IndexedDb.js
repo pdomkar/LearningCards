@@ -11,16 +11,18 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
     const CARD_STORE = "cards";
     const GLOBAL_SETTINGS_STORE = "settings";
     const COLLECTION_SETTINGS_STORE = "collection_settings";
+    const STATISTICS_ANSWERS_STORE = "statistics_answers";
     const STORES = {
         COLLECTION_STORE: COLLECTION_STORE,
         CARD_STORE: CARD_STORE,
         GLOBAL_SETTINGS_STORE: GLOBAL_SETTINGS_STORE,
-        COLLECTION_SETTINGS_STORE: COLLECTION_SETTINGS_STORE
+        COLLECTION_SETTINGS_STORE: COLLECTION_SETTINGS_STORE,
+        STATISTICS_ANSWERS_STORE: STATISTICS_ANSWERS_STORE
     };
 
     var open = function() {
         var deferred = $q.defer();
-        var version = 1;
+        var version = 19;
         var request = indexedDB.open("lCApp", version);
 
         request.onupgradeneeded = function(e) {
@@ -28,13 +30,11 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
 
             e.target.transaction.onerror = indexedDB.onerror;
 
-            if(db.objectStoreNames.contains("collections")) {
-                db.deleteObjectStore("collections");
+            if(db.objectStoreNames.contains(COLLECTION_STORE)) {
+                db.deleteObjectStore(COLLECTION_STORE);
             }
 
-
-
-            var storeColl = db.createObjectStore("collections", {
+            var storeColl = db.createObjectStore(COLLECTION_STORE, {
                 keyPath: "id", autoIncrement : true
             });
             storeColl.createIndex("name", "name", { unique: true });
@@ -42,11 +42,11 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             storeColl.createIndex("hidden", "hidden", { unique: false });
 
 
-            if(db.objectStoreNames.contains("cards")) {
-                db.deleteObjectStore("cards");
+            if(db.objectStoreNames.contains(CARD_STORE)) {
+                db.deleteObjectStore(CARD_STORE);
             }
 
-            var storeCard = db.createObjectStore("cards", {
+            var storeCard = db.createObjectStore(CARD_STORE, {
                 keyPath: "id", autoIncrement : true
             });
             storeCard.createIndex("front", "front", { unique: false });
@@ -57,17 +57,18 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             storeCard.createIndex("nextShow", "nextShow", { unique: false });
             storeCard.createIndex("interval", "interval", { unique: false });
             storeCard.createIndex("hidden", "hidden", { unique: false });
+            storeCard.createIndex("dirty", "dirty", { unique: false });
             storeCard.createIndex("ef", "ef", { unique: false});
             storeCard.createIndex("numberOfIteration", "numberOfIteration", { unique: false});
             storeCard.createIndex('collectionId_hidden', ['collectionId','hidden'], { unique: false });
             storeCard.createIndex('collectionId_hidden_nextShow', ['collectionId','hidden', 'nextShow'], { unique: false });
 
 
-            if(db.objectStoreNames.contains("settings")) {
-                db.deleteObjectStore("settings");
+            if(db.objectStoreNames.contains(GLOBAL_SETTINGS_STORE)) {
+                db.deleteObjectStore(GLOBAL_SETTINGS_STORE);
             }
 
-            var storeSettings = db.createObjectStore("settings", {
+            var storeSettings = db.createObjectStore(GLOBAL_SETTINGS_STORE, {
                 keyPath: "id"
             });
             storeSettings.createIndex("id", "id", { unique: true });
@@ -76,11 +77,11 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             storeSettings.createIndex("typeOfVoice", "typeOfVoice", { unique: false });
             storeSettings.createIndex("volumeOfVoice", "volumeOfVoice", {unique: false});
 
-            if(db.objectStoreNames.contains("collection_settings")) {
-                db.deleteObjectStore("collection_settings");
+            if(db.objectStoreNames.contains(COLLECTION_SETTINGS_STORE)) {
+                db.deleteObjectStore(COLLECTION_SETTINGS_STORE);
             }
 
-            var storeCollectionSettings = db.createObjectStore("collection_settings", {
+            var storeCollectionSettings = db.createObjectStore(COLLECTION_SETTINGS_STORE, {
                 keyPath: "id"
             });
             storeCollectionSettings.createIndex("id", "id", { unique: false });
@@ -89,7 +90,24 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             storeCollectionSettings.createIndex("typeOfVoice", "typeOfVoice", { unique: false });
             storeCollectionSettings.createIndex("volumeOfVoice", "volumeOfVoice", {unique: false});
 
+            if(db.objectStoreNames.contains(STATISTICS_ANSWERS_STORE)) {
+                db.deleteObjectStore(STATISTICS_ANSWERS_STORE);
+            }
 
+            var storeStatisticsAnswers = db.createObjectStore(STATISTICS_ANSWERS_STORE, {
+                keyPath: "id", autoIncrement : true
+            });
+            storeStatisticsAnswers.createIndex("day", "day", { unique: false });
+            storeStatisticsAnswers.createIndex("collectionId", "collectionId", { unique: false });
+            storeStatisticsAnswers.createIndex("again", "again", { unique: false });
+            storeStatisticsAnswers.createIndex("hard", "hard", {unique: false });
+            storeStatisticsAnswers.createIndex("good", "good", {unique: false});
+            storeStatisticsAnswers.createIndex("easy", "easy", {unique: false});
+            storeStatisticsAnswers.createIndex('day_collectionId', ['day', 'collectionId'], { unique: false });
+
+
+
+            //Insert default / Init data -------------------------------
 
             var transaction = e.target.transaction;
 
@@ -105,15 +123,15 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             //Store values in the newly created objectStore.
             var cardAddStore = transaction.objectStore("cards");
             var unixStartDate = moment("01-01-1970", "MM-DD-YYYY").toDate();
-            cardAddStore.add({front: "dog", back: "pes", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "cat", back: "kočka", urlOfImgFront: null, collectionId: 1, lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 16, hidden: "false", ef: 2.7, numberOfIteration: 3});
-            cardAddStore.add({front: "parrot", back: "papoušek", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "cow", back: "kráva", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "rabbit", back: "králík", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "girrafe", back: "žirafa", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "snake", back: "had", urlOfImgFront: null, collectionId: 1, lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 6, hidden: "false", ef: 2.6, numberOfIteration: 2});
-            cardAddStore.add({front: "žítlaza", back: "zizta", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 2, hidden: "false", ef: 2.5, numberOfIteration: 1});
-            cardAddStore.add({front: "kocka", back: "kočka", urlOfImgFront: null, collectionId: 2, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "dog", back: "pes", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "cat", back: "kočka", urlOfImgFront: null, collectionId: 1, lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 16, hidden: "false", dirty: "false", ef: 2.7, numberOfIteration: 3});
+            cardAddStore.add({front: "parrot", back: "papoušek", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "cow", back: "kráva", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "rabbit", back: "králík", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "girrafe", back: "žirafa", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "snake", back: "had", urlOfImgFront: null, collectionId: 1, lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 6, hidden: "false", dirty: "false", ef: 2.6, numberOfIteration: 2});
+            cardAddStore.add({front: "žítlaza", back: "zizta", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 2, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 1});
+            cardAddStore.add({front: "kocka", back: "kočka", urlOfImgFront: null, collectionId: 2, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
 
             //Store values in the newly created objectStore.
             var settingsAddStore = transaction.objectStore("settings");
@@ -128,7 +146,13 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             collectionSettingsAddStore.add({id: 5, playVoiceText: "true", languageOfVoice: "en/en", typeOfVoice: "f2", volumeOfVoice: 100});
             collectionSettingsAddStore.add({id: 6, playVoiceText: "true", languageOfVoice: "en/en", typeOfVoice: "f2", volumeOfVoice: 100});
 
-
+            //Store values in the newly created objectStore.
+            var statisticsAnswersAddStore = transaction.objectStore("statistics_answers");
+            statisticsAnswersAddStore.add({id: 1, day: "2016-02-09", collectionId: 0, again:5, hard: 5, good:5, easy:3});
+            statisticsAnswersAddStore.add({id: 2, day: "2016-02-08", collectionId: 0, again:1, hard: 1, good:1, easy:1});
+            statisticsAnswersAddStore.add({id: 3, day: "2016-02-07", collectionId: 0, again:5, hard: 7, good:4, easy:3});
+            statisticsAnswersAddStore.add({id: 5, day: "2016-02-05", collectionId: 0, again:2, hard: 1, good:0, easy:0});
+            statisticsAnswersAddStore.add({id: 6, day: "2016-02-04", collectionId: 0, again:1, hard: 8, good:3, easy:3});
 
         };
 
@@ -243,6 +267,7 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
         } else {
             var trans = db.transaction([store]);
             var store = trans.objectStore(store);
+            console.log(indexName);
             var myIndex = store.index(indexName);
             var data = [];
 
@@ -426,6 +451,7 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
 
     var update = function(store, item) {
         var deferred = $q.defer();
+        console.log(item);
         if(store === null || store === undefined) {
             deferred.reject("Name of store canot be null or undefined");
         }else if(db === null || db === undefined) {
