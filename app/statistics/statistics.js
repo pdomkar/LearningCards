@@ -52,74 +52,84 @@ statistics.controller('StatisticsCtrl', ['$scope', '$routeParams', '$window', '$
         });
 
         IndexedDb.findByProperty(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, 'collectionId', 0 ).then(function(response) {
-
-
-
-            var before = moment().subtract(6, 'days');
-            before.set({'hour': 0, 'minute': 0, 'second': 0});
-
-            response.sort(function(a,b) {
-                return new Date(b.day).getTime() - new Date(a.day).getTime()
-            });
-
-            var data = [[],[],[],[]];
-            for(var i = 0; i < 7 ; i++) {
-                var actualDay = null;
-                for(var j = 0; j < response.length; j++) {
-                    if(moment(response[j].day).isSame(before.format("YYYY-MM-DD"), 'day')) {
-                        actualDay = response[j];
-                        break;
-                    }
-                }
-                if(actualDay !== null) {
-                    data[0][i] = actualDay.again;
-                    data[1][i] = actualDay.hard;
-                    data[2][i] = actualDay.good;
-                    data[3][i] = actualDay.easy;
-                } else {
-                    data[0][i] = data[1][i] = data[2][i] = data[3][i] = 0;
-                }
-                before = before.add(1, 'days');
-            }
-
-            var dataBar = {
-                labels: ['Today', '-1 day', '-2 days', '-3 days', '-4 days','-5 days','-6 days'].reverse(),
-                series: data
-            };
-
-            var optionsBar = {
-                stackBars: true,
-                axisY: {
-                    labelInterpolationFnc: function(value) {
-                        return (value);
-                    }
-                }
-            };
+            generateBarGraph(response, 6);
+            generateBarGraph(response, 13);
+            generateBarGraph(response, 20);
+            generateBarGraph(response, 27);
 
             var legendBar = $('.ct-legend.legend-bar');
-
-            new Chartist.Bar('#chart2', dataBar, optionsBar).on('draw', function(data) {
-                if(data.type === 'bar') {
-                    data.element.attr({
-                        style: 'stroke-width: 10px'
-                    });
-                }
-            });
-
-
-
-
             $.each(['Again','Hard', 'Good', 'Easy'], function(i, val) { //TODO asi potreba přidat nejaky json s moznostmi tlačítek, a pro ne barvy a legendy
                 $('<li />')
                     .addClass('ct-series-' + i)
                     .html('<strong>' + val + '</strong>')
                     .appendTo(legendBar);
             });
-
         }, function(err) {
             $window.alert(err);
         });
 
+    }
+
+    function generateBarGraph(response, subtractDays) {
+        var before = moment().subtract(subtractDays, 'days');
+        before.set({'hour': 0, 'minute': 0, 'second': 0});
+
+        response.sort(function(a,b) {
+            return new Date(b.day).getTime() - new Date(a.day).getTime()
+        });
+
+        var data = [[],[],[],[]];
+        for(var i = 0; i < 7 ; i++) {
+            var actualDay = null;
+            for(var j = 0; j < response.length; j++) {
+                if(moment(response[j].day).isSame(before.format("YYYY-MM-DD"), 'day')) {
+                    actualDay = response[j];
+                    break;
+                }
+            }
+            if(actualDay !== null) {
+                data[0][i] = actualDay.again;
+                data[1][i] = actualDay.hard;
+                data[2][i] = actualDay.good;
+                data[3][i] = actualDay.easy;
+            } else {
+                data[0][i] = data[1][i] = data[2][i] = data[3][i] = 0;
+            }
+            before = before.add(1, 'days');
+        }
+
+        var labels = [];
+        for(var k = 0; k < 7; k++) {
+            var negativeDays = (subtractDays - k);
+            if( negativeDays == 0)
+                labels.push('Today');
+            else if ( negativeDays == 1)
+                labels.push('-' + negativeDays + ' day');
+            else
+                labels.push('-' + negativeDays + ' days');
+        }
+
+        var dataBar = {
+            labels: labels,
+            series: data
+        };
+
+        var optionsBar = {
+            stackBars: true,
+            axisY: {
+                labelInterpolationFnc: function(value) {
+                    return (value);
+                }
+            }
+        };
+
+        new Chartist.Bar('#chart2-' + subtractDays, dataBar, optionsBar).on('draw', function(data) {
+            if(data.type === 'bar') {
+                data.element.attr({
+                    style: 'stroke-width: 10px'
+                });
+            }
+        });
     }
 
     $scope.init = function() {

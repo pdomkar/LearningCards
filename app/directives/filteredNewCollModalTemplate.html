@@ -10,7 +10,7 @@
                 <article data-type="list">
                     <ul id="item-list">
                         <li ng-repeat="card in cards" data-id="{{card.id}}">
-                            {{card.front}} | {{card.back}}<input type="checkbox" name="filteredCards" style="position:absolute; right:0px;">
+                            {{card.front}} | {{card.back}} ({{card.collectionName}})<input type="checkbox" name="filteredCards" style="position:absolute; right:0px;">
                         </li>
                     </ul>
                 </article>

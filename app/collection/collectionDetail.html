@@ -1,4 +1,4 @@
-<section role="region" data-ng-init="init()">
+<section class="principal" role="region" data-ng-init="init()">
     <header>
         <menu type="toolbar">
             <a ng-click="showAddCardModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>
@@ -19,7 +19,7 @@
             <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
             <li><a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" class="item">Statistics</a></li>
         </ul>
-        <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
+        <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>{{cd.collectionDetail.name}}</h1>
     </header>
     <div class="container">
@@ -37,7 +37,10 @@
     <br />
 
     <section class="gaia-list fit scroll sticky">
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cd.cards">
+            <div class="row" style="border-bottom:1px solid orange; margin:2px;">
+                <label>Search: <input ng-model="searchText"></label>
+            </div>
+            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cd.cards | filter:searchText">
 
                <div class="col-md-11">{{card.front}} | {{card.back}}</div>
                 <div class="col-md-1">

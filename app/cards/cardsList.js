@@ -64,13 +64,31 @@ cardsList.controller('CardsListCtrl', ['$scope', '$routeParams', 'IndexedDb', '$
         }, function(err){
             $window.alert(err);
         });
+
     };
 
     $scope.init = function() {
         IndexedDb.open().then(function(){
             $scope.refreshList();
         });
-    }
+    };
 
 
+}]);
+
+cardsList.filter('getCollectionName', ['IndexedDb', '$q', function(IndexedDb, $q) {
+    return function(idCollection) {
+        var val = 'not';
+        var promises=[];
+        promises.push(IndexedDb.getById(IndexedDb.STORES.COLLECTION_STORE, idCollection).then(function(data) {
+                 val = data.name;
+            }, function(err){
+                $window.alert(err);
+            })
+        );
+        $q.all(promises).then(
+            function(){ return val;}
+        );
+
+    };
 }]);

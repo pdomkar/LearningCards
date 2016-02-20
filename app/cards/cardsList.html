@@ -1,21 +1,24 @@
-<section role="region" data-ng-init="init()">
+<section class="principal" role="region" data-ng-init="init()">
     <header>
         <menu type="toolbar">
            <!--<a ng-click="showAddCardModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>-->
            <!--<button ui-turn-on='menuOpt'><span class="icon icon-menu">show sidebar</span></button>-->
         </menu>
 
-        <a ng-href="#/collections/"><span class="icon icon-back">Zpět</span></a>
+        <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>Cards</h1>
     </header>
 
     <section class="gaia-list fit scroll sticky">
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cl.cards" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
+            <div class="row" style="border-bottom:1px solid orange; margin:2px;">
+                <label>Search: <input ng-model="searchText"></label>
+            </div>
+            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cl.cards | filter:searchText" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
 
                <div class="col-md-11">
                    {{card.front}} | {{card.back}}
                    <br />
-                    {{card.collectionId}}
+                    {{card.collectionName}}
                </div>
                 <div class="col-md-1">
                     <div ui-turn-on='cardOpt{{card.id}}' class='btn'>

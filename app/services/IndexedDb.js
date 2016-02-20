@@ -22,7 +22,7 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
 
     var open = function() {
         var deferred = $q.defer();
-        var version = 19;
+        var version = 5;
         var request = indexedDB.open("lCApp", version);
 
         request.onupgradeneeded = function(e) {
@@ -53,6 +53,7 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             storeCard.createIndex("back", "back", { unique: false });
             storeCard.createIndex("urlOfImgFront", "urlOfImgFront", { unique: false });
             storeCard.createIndex("collectionId", "collectionId", { unique: false });
+            storeCard.createIndex("collectionName", "collectionName", { unique: false });
             storeCard.createIndex("lastShow", "lastShow", { unique: false });
             storeCard.createIndex("nextShow", "nextShow", { unique: false });
             storeCard.createIndex("interval", "interval", { unique: false });
@@ -123,15 +124,15 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
             //Store values in the newly created objectStore.
             var cardAddStore = transaction.objectStore("cards");
             var unixStartDate = moment("01-01-1970", "MM-DD-YYYY").toDate();
-            cardAddStore.add({front: "dog", back: "pes", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "cat", back: "kočka", urlOfImgFront: null, collectionId: 1, lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 16, hidden: "false", dirty: "false", ef: 2.7, numberOfIteration: 3});
-            cardAddStore.add({front: "parrot", back: "papoušek", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "cow", back: "kráva", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "rabbit", back: "králík", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "girrafe", back: "žirafa", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
-            cardAddStore.add({front: "snake", back: "had", urlOfImgFront: null, collectionId: 1, lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 6, hidden: "false", dirty: "false", ef: 2.6, numberOfIteration: 2});
-            cardAddStore.add({front: "žítlaza", back: "zizta", urlOfImgFront: null, collectionId: 1, lastShow: null, nextShow: unixStartDate, interval: 2, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 1});
-            cardAddStore.add({front: "kocka", back: "kočka", urlOfImgFront: null, collectionId: 2, lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "dog", back: "pes", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "cat", back: "kočka", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 16, hidden: "false", dirty: "false", ef: 2.7, numberOfIteration: 3});
+            cardAddStore.add({front: "parrot", back: "papoušek", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "cow", back: "kráva", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "rabbit", back: "králík", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "girrafe", back: "žirafa", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
+            cardAddStore.add({front: "snake", back: "had", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(), nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(), interval: 6, hidden: "false", dirty: "false", ef: 2.6, numberOfIteration: 2});
+            cardAddStore.add({front: "žítlaza", back: "zizta", urlOfImgFront: null, collectionId: 1, collectionName: "Angličtina", lastShow: null, nextShow: unixStartDate, interval: 2, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 1});
+            cardAddStore.add({front: "kocka", back: "kočka", urlOfImgFront: null, collectionId: 2, collectionName: "Němčina", lastShow: null, nextShow: unixStartDate, interval: 0, hidden: "false", dirty: "false", ef: 2.5, numberOfIteration: 0});
 
             //Store values in the newly created objectStore.
             var settingsAddStore = transaction.objectStore("settings");
@@ -189,6 +190,44 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
                 var result = e.target.result;
                 if(result === null || result === undefined)
                 {
+                    deferred.resolve(data);
+                }
+                else{
+                    data.push(result.value);
+                    result.continue();
+                }
+            };
+
+            cursorRequest.onerror = function(e){
+                console.log(e.value);
+                deferred.reject("Something went wrong!!!");
+            };
+        }
+
+        return deferred.promise;
+    };
+
+    var findAllCardsWithColl = function() {
+        var deferred = $q.defer();
+        if(db === null || db === undefined) {
+            deferred.reject("IndexDB is not opened yet!");
+        } else{
+            var trans = db.transaction(['cards']);
+            var store = trans.objectStore('cards');
+            var data = [];
+
+            // Get everything in the store;
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+
+            cursorRequest.onsuccess = function(e) {
+                var result = e.target.result;
+                if(result === null || result === undefined)
+                {
+                    //add to data collectionName
+                    console.log(data);
+
+
                     deferred.resolve(data);
                 }
                 else{
@@ -267,7 +306,6 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
         } else {
             var trans = db.transaction([store]);
             var store = trans.objectStore(store);
-            console.log(indexName);
             var myIndex = store.index(indexName);
             var data = [];
 
@@ -451,7 +489,6 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
 
     var update = function(store, item) {
         var deferred = $q.defer();
-        console.log(item);
         if(store === null || store === undefined) {
             deferred.reject("Name of store canot be null or undefined");
         }else if(db === null || db === undefined) {

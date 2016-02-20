@@ -163,6 +163,7 @@ globalDirectives.directive('confirmDialog', function() {
                                 IndexedDb.getById(IndexedDb.STORES.CARD_STORE, dataIdToAdded[i]).then(function(data) {
                                     delete data['id'];
                                     data.collectionId = addedCollId;
+                                    data.collectionName = scope.filteredColl.name;
                                     data.lastShow = null;
                                     data.nextShow = moment("01-01-1970", "MM-DD-YYYY").toDate();
                                     data.interval = 0;
@@ -180,7 +181,6 @@ globalDirectives.directive('confirmDialog', function() {
                                 });
                                 ++i;
                             } else {   // complete
-                                console.log('all data added');
                                 $location.path('/collections/' + addedCollId);
                             }
                         }
@@ -232,7 +232,38 @@ globalDirectives.directive('confirmDialog', function() {
         },
         link: link
     };
+}]).directive('collectionUnique', ['IndexedDb', '$window', function(IndexedDb, $window) {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$validators.unique =
+                function(modelValue, viewValue) {
+                    scope.a = {
+                        val: "aaa",
+                        setValue: function(v) {
+                            this.val = v;
+                        },
+                        getValue: function() {
+                            return this.val;
+                        }
+                    };
+                    if(viewValue === undefined || viewValue === null) { viewValue = ""}
+                    var askForPromise =  IndexedDb.findByProperty(IndexedDb.STORES.COLLECTION_STORE, "name", viewValue);
+                    askForPromise.then(function (data) {
+                                console.log(scope.a.val);
+                                scope.a.setValue(data.length);
+                        console.log(scope.a.getValue());
+                            }, function (err) {
+                                $window.alert(err);
+                            });
+                    //dont workkkk TODO
+                    return true;
+                };
+        }
+    };
 }]);
+
 
 
 

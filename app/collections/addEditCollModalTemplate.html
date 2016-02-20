@@ -4,7 +4,7 @@
         <h1 ng-if="addEditCollModalMode == 'update'">Update collection</h1>
 
         <p>
-            <input type="text" placeholder="Name" data-ng-model="coll.name" required="" />
+            <input type="text" placeholder="Name" data-ng-model="coll.name" collection-unique="" required="" />
             <input type="text" placeholder="Description" data-ng-model="coll.description"/>
         </p>
     </section>

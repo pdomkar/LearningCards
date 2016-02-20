@@ -72,6 +72,19 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
 
     $scope.update = function(collection) {
         IndexedDb.update(IndexedDb.STORES.COLLECTION_STORE, collection).then(function() {
+                //Update collectionName in cadrs in this collection
+            IndexedDb.findByProperty(IndexedDb.STORES.CARD_STORE, "collectionId", parseInt(collection.id)).then(function(data) {
+                for(var i = 0; i<data.length; i++) {
+                    data[i].collectionName = collection.name;
+                    IndexedDb.update(IndexedDb.STORES.CARD_STORE, data[i]).then(function() {
+                    }, function(err) {
+                        $window.alert(err);
+                    });
+                }
+            }, function(err) {
+                $window.alert(err);
+            });
+
             $scope.refreshList();
         }, function(err) {
             $window.alert(err);

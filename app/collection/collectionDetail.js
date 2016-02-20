@@ -35,7 +35,8 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
 
 
     $scope.add = function(card) {
-        card.collectionId =cd.collectionDetail.id;
+        card.collectionId = cd.collectionDetail.id;
+        card.collectionName = cd.collectionDetail.name;
         card.lastShow = null;
         card.nextShow = moment("01-01-1970", "MM-DD-YYYY").toDate();
         card.interval = 0;
