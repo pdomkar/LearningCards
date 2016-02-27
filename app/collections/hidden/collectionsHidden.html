@@ -3,12 +3,14 @@
         <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>Hidden collections</h1>
     </header>
-    <section class="gaia-list fit scroll sticky">
-        <div class="row" ng-repeat="collection in ch.collections">
-           <div class="col-md-11">{{collection.name}}</div>
-            <div class="col-md-1">
-                <i data-icon="reload" aria-label="Show" ng-click="show(collection)" class="pointer"></i>
-                <i data-icon="delete" aria-label="Delete" ng-click="callRemove(collection.id)" class="pointer"></i>
+    <section class="pagebodyList">
+        <div class="row cardItem" ng-repeat="collection in ch.collections">
+            <a class="collectionListItem">
+                <div class="pull-left oneRow"><b>{{collection.name}}</b></div>
+            </a>
+            <div class="btn-group pull-right btn-group-xs" role="group">
+                <i data-icon="reload" class="btn btn-default btn-xs pointer" aria-label="Show" ng-click="show(collection)"></i>
+                <i data-icon="delete" class="btn btn-default btn-xs pointer" aria-label="Delete" ng-click="callRemove(collection.id)"></i>
             </div>
         </div>
     </section>

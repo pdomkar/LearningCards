@@ -1,6 +1,6 @@
 'use strict';
 
-var collectionSettings = angular.module('collectionSettings', ['mobile-angular-ui']);
+var collectionSettings = angular.module('collectionSettings', []);
 
 
 collectionSettings.controller('CollectionSettingsCtrl', ['$scope', '$routeParams', '$window', '$location', 'IndexedDb', function($scope, $routeParams, $window, $location, IndexedDb) {

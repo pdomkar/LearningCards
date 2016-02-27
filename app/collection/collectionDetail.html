@@ -2,71 +2,71 @@
     <header>
         <menu type="toolbar">
             <a ng-click="showAddCardModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>
-            <button ui-turn-on='menuOpt'><span class="icon icon-menu">show sidebar</span></button>
+            <button class="sidebar_trigger"><span class="icon icon-menu">show sidebar</span></button>
         </menu>
-        <ul
-                ui-state="menuOpt"
-
-                class="dropdown-menu"
-                ui-outer-click="Ui.turnOff('menuOpt' + collection.id)"
-                ui-outer-click-if="Ui.active('menuOpt')"
-                role="menu"
-                ui-show="menuOpt"
-                ui-turn-off="menuOpt">
-
-            <li><a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a></li>
-            <li><a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a></li>
-            <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
-            <li><a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" class="item">Statistics</a></li>
-        </ul>
         <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>{{cd.collectionDetail.name}}</h1>
     </header>
-    <div class="container">
-        <div class="row">
-            <div class="coll-md-12">
-                <center>{{cd.collectionDetail.name}}</center>
-                {{cd.collectionDetail.description}}<br />
-                Nových karet: {{cd.newCards.length}}<br />
-                Na učení karet: {{cd.cardsToStudy.length}}<br />
-                Celkem karet: {{cd.cards.length}}<br />
-                <a ng-href="#/collections/{{cd.collectionDetail.id}}/study" class="btn btn-info col-md-12" ng-click="">Start Study</a>
-            </div>
+
+    <section class="pagebodyList">
+        <div class="collectionDetailInfo">
+            <table>
+                <tbody >
+                    <tr class="bigger">
+                        <td>New cards: </td>
+                        <td style="padding-left: 30px;" class="colorBlue">{{cd.newCards.length}}</td>
+                    </tr>
+                    <tr class="bigger">
+                        <td>Repeated cards: </td>
+                        <td style="padding-left: 30px;" class="colorRed">{{cd.repeatedCards.length}}</td>
+                    </tr>
+                    <tr class="bigger">
+                        <td>Cards for study: </td>
+                        <td style="padding-left: 30px;">{{cd.cardsToStudy.length}}</td>
+                    </tr>
+                    <tr class="bigger">
+                        <td>Total cards: </td>
+                        <td style="padding-left: 30px;">{{cd.cards.length}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>{{cd.collectionDetail.description}}</p>
+            <a ng-href="#/collections/{{cd.collectionDetail.id}}/study" ng-if="cd.cardsToStudy.length > 0" class="btnStartStudy">Start Study</a>
         </div>
-    </div>
-    <br />
+        <div class="row cardItem">
+            <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
+        </div>
 
-    <section class="gaia-list fit scroll sticky">
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;">
-                <label>Search: <input ng-model="searchText"></label>
+        <div class="row cardItem" ng-repeat="card in cd.cards | filter:searchText">
+           <div class="pull-left">
+               <span class="cardItemFrontBack" style="border-bottom:1px solid #aaa;">{{card.front}}</span>
+               <span class="cardItemFrontBack">{{card.back}}</span>
+           </div>
+            <div class="btn-group pull-right btn-group-xs" role="group">
+                <i data-icon="compose" class="btn btn-default btn-xs pointer" aria-label="Edit" ng-click="showUpdateCardModal(card.id)"><span class="iconText">Edit</span></i>
+                <i data-icon="effects" class="btn btn-default btn-xs pointer" aria-label="Hide" ng-click="hide(card)"><span class="iconText">Hide</span></i>
+                <i data-icon="delete" class="btn btn-default btn-xs pointer" aria-label="Delete" ng-click="callRemove(card.id)"><span class="iconText">Delete</span></i>
             </div>
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cd.cards | filter:searchText">
 
-               <div class="col-md-11">{{card.front}} | {{card.back}}</div>
-                <div class="col-md-1">
-                    <div ui-turn-on='cardOpt{{card.id}}' class='btn'>
-                        <i class="fa fa-ellipsis-v"></i>
-                    </div>
-                    <ul
-                            ui-state="cardOpt{{card.id}}"
-
-                            class="dropdown-menu"
-                            ui-outer-click="Ui.turnOff('cardOpt' + card.id)"
-                            ui-outer-click-if="Ui.active('cardOpt' + card.id)"
-                            role="menu"
-                            ui-show="cardOpt{{card.id}}"
-                            ui-turn-off="cardOpt{{card.id}}">
-
-                        <li><a ng-click="showUpdateCardModal(card.id)">Update</a></li>
-                        <li><a ng-click="hide(card)">Hide</a></li>
-                        <li><a ng-click="callRemove(card.id)">Delete</a></li>
-                    </ul>
-                </div>
-
-            </div>
-      </section>
+        </div>
+    </section>
 </section>
+
+<section class="sidebar" role="region">
+    <header>
+        <button class="sidebar_trigger"><span class="icon icon-back">Back</span></button>
+        <h1>Menu</h1>
+    </header>
+    <menu class="menulist">
+        <a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a>
+        <a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a>
+        <a href="" ng-click="showEditCollModalFce(updateCollId)" class="item">Edit collection</a>
+        <a href="" ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a>
+        <a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" class="item">Collection statistics</a>
+    </menu>
+</section>
+
 <filtered-new-coll-modal coll-id="filteredBaseCollId" show-filtered-new-coll-modal="showFilteredNewColl"></filtered-new-coll-modal>
 <add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>
 <confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>
-
+<add-edit-coll-modal add-edit-coll-modal-mode="editCollModalMode" update-id="updateCollId" add-fce="" update-fce="updateColl(newColl)" show-modal="showEditCollModal"></add-edit-coll-modal>

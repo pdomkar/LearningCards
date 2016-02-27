@@ -152,7 +152,7 @@ globalDirectives.directive('confirmDialog', function() {
                         //insert selected cards
                         var dataIdToAdded = [];
                         var i = 0;
-                        $('input[name="filteredCards"]:checked').parent('li').each(function( ) {
+                        $('input[name="filteredCards"]:checked').parent('label').parent('div.filterCollectionItem').each(function( ) {
                             dataIdToAdded.push($( this ).data('id'));
                         });
 
@@ -261,6 +261,54 @@ globalDirectives.directive('confirmDialog', function() {
                     return true;
                 };
         }
+    };
+}]).directive('addEditCollModal', ['IndexedDb', '$window', function(IndexedDb, $window) {
+    function link(scope) {
+        scope.cancel = function() {
+            scope.showModal = false;
+            scope.addEditCollModalMode = "";
+            scope.coll = {};
+        };
+
+        scope.add = function(coll) {
+            scope.addFce({newColl: coll});
+            scope.showModal = false;
+            scope.addEditCollModalMode = "";
+            scope.coll = {};
+        };
+
+
+        scope.update = function(coll) {
+            scope.updateFce({newColl: coll});
+            scope.showModal = false;
+            scope.addEditCollModalMode = "";
+            scope.coll = {};
+        };
+
+
+        scope.$watch('addEditCollModalMode', function(addEditCollModalMode) {
+            if (addEditCollModalMode == "update") {
+                IndexedDb.getById(IndexedDb.STORES.COLLECTION_STORE, parseInt(scope.updateId)).then(function(data) {
+                    scope.coll = data;
+                }, function(err) {
+                    $window.alert(err);
+                });
+            }
+        });
+
+    }
+
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/addEditCollModalTemplate.html',
+        scope: {
+            addEditCollModalMode: '=',
+            updateId: '=',
+            addFce: '&',
+            updateFce: '&',
+            showModal: '='
+        },
+        link: link
     };
 }]);
 

@@ -1,59 +1,40 @@
 <section class="principal" role="region" data-ng-init="init()">
     <header>
-
         <menu type="toolbar">
             <a ng-click="showAddCollModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>
-            <button ui-turn-on='menuOpt'><span class="icon icon-menu">show sidebar</span></button>
+            <button class="sidebar_trigger"><span class="icon icon-menu">show sidebar</span></button>
         </menu>
-        <ul
-                ui-state="menuOpt"
-
-                class="dropdown-menu"
-                ui-outer-click="Ui.turnOff('menuOpt' + collection.id)"
-                ui-outer-click-if="Ui.active('menuOpt')"
-                role="menu"
-                ui-show="menuOpt"
-                ui-turn-off="menuOpt">
-
-            <li><a ng-href="#/collections/hidden/" class="item">Display hidden collecction</a></li>
-            <li><a ng-href="#/cards/" class="item">Show all cards</a></li>
-            <li><a ng-href="#/settings/" class="item">Settings</a></li>
-            <li><a ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a></li>
-            <li><a ng-href="#/statistics/" class="item">Statistics</a></li>
-        </ul>
-
         <h1>Collections</h1>
     </header>
-    <section class="gaia-list fit scroll sticky">
+    <section class="pagebodyList">
+       <div class="row cardItem" ng-repeat="collection in cl.collections">
+            <a ng-href="#/collections/{{collection.id}}" class="collectionListItem">
+                <div class="pull-left"><b>{{collection.name}}</b><br />
+                    {{collection.description}}</div>
+            </a>
 
-       <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="collection in cl.collections">
-
-            <a ng-href="#/collections/{{collection.id}}"><div class="col-md-11">{{collection.name}}<br />{{collection.description}}</div></a>
-            <div class="col-md-1">
-            <div ui-turn-on='collectionOpt{{collection.id}}' class='btn'>
-            <i class="fa fa-ellipsis-v"></i>
-            </div>
-            <ul
-            ui-state="collectionOpt{{collection.id}}"
-
-            class="dropdown-menu"
-            ui-outer-click="Ui.turnOff('collectionOpt' + collection.id)"
-            ui-outer-click-if="Ui.active('collectionOpt' + collection.id)"
-            role="menu"
-            ui-show="collectionOpt{{collection.id}}"
-            ui-turn-off="collectionOpt{{collection.id}}">
-
-            <li><a ng-click="showUpdateCollModal(collection.id)">Update</a></li>
-            <li><a ng-click="hide(collection)">Hide</a></li>
-            <li><a ng-click="callRemove(collection.id);">Delete</a></li>
-            </ul>
-            </div>
-
-            </div>
-
+           <div class="btn-group pull-right btn-group-xs" role="group">
+               <i data-icon="compose" class="btn btn-default btn-xs pointer" aria-label="Edit" ng-click="showUpdateCollModal(collection.id)"><span class="iconText">Edit</span></i>
+               <i data-icon="effects" class="btn btn-default btn-xs pointer" aria-label="Hide" ng-click="hide(collection)"><span class="iconText">Hide</span></i>
+               <i data-icon="delete" class="btn btn-default btn-xs pointer" aria-label="Delete" ng-click="callRemove(collection.id)"><span class="iconText">Delete</span></i>
+           </div>
+        </div>
     </section>
 
 
+</section>
+<section class="sidebar" role="region">
+    <header>
+        <button class="sidebar_trigger"><span class="icon icon-back">Back</span></button>
+        <h1>Menu</h1>
+    </header>
+    <menu class="menulist">
+        <a ng-href="#/collections/hidden/">Display hidden collecction</a>
+        <a ng-href="#/cards/">Show all cards</a>
+        <a ng-href="#/settings/">Settings</a>
+        <a href="" ng-click="showFilteredNewCollModal()">Create filtered collection</a>
+        <a ng-href="#/statistics/">Statistics</a>
+    </menu>
 </section>
 
 <filtered-new-coll-modal coll-id="null" show-filtered-new-coll-modal="showFilteredNewColl"></filtered-new-coll-modal>

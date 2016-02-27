@@ -1,6 +1,6 @@
 'use strict';
 
-var statistics = angular.module('statistics', ['mobile-angular-ui']);
+var statistics = angular.module('statistics', []);
 
 
 statistics.controller('StatisticsCtrl', ['$scope', '$routeParams', '$window', '$location', 'IndexedDb', function($scope, $routeParams, $window, $location, IndexedDb) {
@@ -131,6 +131,16 @@ statistics.controller('StatisticsCtrl', ['$scope', '$routeParams', '$window', '$
             }
         });
     }
+
+    $scope.initGraphSlider = function () {
+        $(function () {
+            // wait till load event fires so all resources are available
+            $scope.$slider = $('.my-graph-slider').unslider({nav: false, index: 'last', arrows: {prev: '<a class="unslider-arrow-my prev">Previous week</a>',
+                next: '<a class="unslider-arrow-my next">Next week'}})
+        });
+    };
+
+    $scope.initGraphSlider();
 
     $scope.init = function() {
         IndexedDb.open().then(function(){

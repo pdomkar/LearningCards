@@ -1,6 +1,8 @@
 <form role="dialog" data-type="confirm" class="confirm" ng-show='showConfirm'>
     <section>
-        <h1 ng-if="title !== undefined">{{title}}</h1>
+        <header class="dialogHeader">
+            <h1 ng-if="title !== undefined">{{title}}</h1>
+        </header>
         <p>{{body || "Are you sure?"}}</p>
     </section>
     <menu>

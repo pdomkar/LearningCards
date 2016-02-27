@@ -9,40 +9,27 @@
         <h1>Cards</h1>
     </header>
 
-    <section class="gaia-list fit scroll sticky">
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;">
-                <label>Search: <input ng-model="searchText"></label>
+    <section class="pagebodyList">
+        <div class="row cardItem">
+            <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
+        </div>
+        <div class="row cardItem" ng-repeat="card in cl.cards | filter:searchText" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
+
+           <div class="pull-left">
+               {{card.front}} | {{card.back}}
+               <br />
+                {{card.collectionName}}
+           </div>
+
+            <div class="btn-group pull-right btn-group-xs" role="group">
+                <i data-icon="compose" class="btn btn-default btn-xs pointer" aria-label="Edit" ng-click="showUpdateCardModal(card.id)"><span class="iconText">Edit</span></i>
+                <i data-icon="effects" class="btn btn-default btn-xs pointer" aria-label="Hide" ng-show="(card.hidden.toLowerCase() == 'false')" ng-click="hide(card)"><span class="iconText">Hide</span></i>
+                <i data-icon="search" class="btn btn-default btn-xs pointer" aria-label="Hide" ng-show="(card.hidden.toLowerCase() == 'true')" ng-click="show(card)"><span class="iconText">Show</span></i>
+                <i data-icon="delete" class="btn btn-default btn-xs pointer" aria-label="Delete" ng-click="callRemove(card.id)"><span class="iconText">Delete</span></i>
             </div>
-            <div class="row" style="border-bottom:1px solid orange; margin:2px;" ng-repeat="card in cl.cards | filter:searchText" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
 
-               <div class="col-md-11">
-                   {{card.front}} | {{card.back}}
-                   <br />
-                    {{card.collectionName}}
-               </div>
-                <div class="col-md-1">
-                    <div ui-turn-on='cardOpt{{card.id}}' class='btn'>
-                        <i class="fa fa-ellipsis-v"></i>
-                    </div>
-                    <ul
-                            ui-state="cardOpt{{card.id}}"
-
-                            class="dropdown-menu"
-                            ui-outer-click="Ui.turnOff('cardOpt' + card.id)"
-                            ui-outer-click-if="Ui.active('cardOpt' + card.id)"
-                            role="menu"
-                            ui-show="cardOpt{{card.id}}"
-                            ui-turn-off="cardOpt{{card.id}}">
-
-                        <li><a ng-click="showUpdateCardModal(card.id)">Update</a></li>
-                        <li ng-show="(card.hidden.toLowerCase() == 'false')"><a ng-click="hide(card)">Hide</a></li>
-                        <li ng-show="(card.hidden.toLowerCase() == 'true')"><a ng-click="show(card)">Show</a></li>
-                        <li><a ng-click="callRemove(card.id)">Delete</a></li>
-                    </ul>
-                </div>
-
-            </div>
-      </section>
+        </div>
+    </section>
 </section>
 <add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>
 <confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>

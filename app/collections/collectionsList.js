@@ -1,6 +1,6 @@
 'use strict';
 
-var collectionsList = angular.module('collectionsList', ['mobile-angular-ui', 'globalDirectives', 'collectionsDirectives']);
+var collectionsList = angular.module('collectionsList', ['globalDirectives']);
 
 
 collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$window', 'IndexedDb', function($scope, $location, $window, IndexedDb) {

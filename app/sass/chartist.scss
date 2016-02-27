@@ -7,8 +7,9 @@ $ct-series-colors: (#d70206, #F05B4F, #F4C63D, #d17905) !default;
   li {
     position: relative;
     padding-left: 1.3em;
-    margin-bottom: 0.3em;
     list-style-type: none;
+    margin: 0 auto;
+    margin-bottom: 0.3em;
   }
 
   li::before {
@@ -19,6 +20,11 @@ $ct-series-colors: (#d70206, #F05B4F, #F4C63D, #d17905) !default;
     left: 0;
     content: '';
     border-radius: 1em;
+  }
+
+
+  .ct-legend-inline {
+
   }
 
   @for $i from 0 to length($ct-series-colors) {

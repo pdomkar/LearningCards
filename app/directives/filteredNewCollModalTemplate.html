@@ -1,19 +1,28 @@
 <form role="dialog" data-type="confirm" name="filteredNewCollModal" class="addEditModal" ng-show='showFilteredNewCollModal' novalidate="">
     <section>
-        <h1 ng-if="collId == null">Create new collection from cards</h1>
-        <h1 ng-if="collId != null">Create new collection from collection</h1>
+        <header class="dialogHeader">
+            <h1 data-ng-if="collId == null">Create new collection from cards</h1>
+            <h1 data-ng-if="collId != null">Create new collection from collection</h1>
+        </header>
         <p>
             <input type="text" placeholder="Name" data-ng-model="filteredColl.name" required="" />
             <input type="text" placeholder="Description" data-ng-model="filteredColl.description" />
-            Select all: <input type="checkbox" name="checkAll" ng-model="checkAll" ng-change="selectDeselectAll(checkAll);" style="position:absolute; right:0px;">
-            <div id="item-list-container" class="item-list-scrollouter">
-                <article data-type="list">
-                    <ul id="item-list">
-                        <li ng-repeat="card in cards" data-id="{{card.id}}">
-                            {{card.front}} | {{card.back}} ({{card.collectionName}})<input type="checkbox" name="filteredCards" style="position:absolute; right:0px;">
-                        </li>
-                    </ul>
-                </article>
+
+            <div class="pagebodyListDialog">
+                <div class="row filterCollectionItem">
+                    <div class="pull-left" style="font-size: 2rem; margin-top: 10px;">Select all:</div>
+                    <label class="pack-checkbox pull-right" style="margin-top: -5px;">
+                        <input type="checkbox" name="checkAll" data-ng-model="checkAll" data-ng-change="selectDeselectAll(checkAll);" />
+                        <span></span>
+                    </label>
+                </div>
+                <div class="row filterCollectionItem" ng-repeat="card in cards" data-id="{{card.id}}">
+                    <div class="pull-left">{{card.front}} | {{card.back}}<br>({{card.collectionName}})</div>
+                    <label class="pack-checkbox pull-right" style="margin-top: -5px;">
+                        <input type="checkbox" name="filteredCards"  />
+                        <span></span>
+                    </label>
+                </div>
             </div>
         </p>
     </section>

@@ -1,6 +1,6 @@
 'use strict';
 
-var settings = angular.module('settings', ['mobile-angular-ui']);
+var settings = angular.module('settings', []);
 
 
 settings.controller('SettingsCtrl', ['$scope', '$routeParams', '$window', '$location', 'IndexedDb', function($scope, $routeParams, $window, $location, IndexedDb) {

@@ -1,6 +1,6 @@
 'use strict';
 
-var cardsList = angular.module('cardsList', ['mobile-angular-ui', 'globalDirectives']);
+var cardsList = angular.module('cardsList', ['globalDirectives']);
 
 
 cardsList.controller('CardsListCtrl', ['$scope', '$routeParams', 'IndexedDb', '$window', function($scope, $routeParams, IndexedDb, $window) {

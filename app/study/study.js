@@ -1,6 +1,6 @@
 'use strict';
 
-var study = angular.module('study', ['mobile-angular-ui', 'collectionsDirectives']);
+var study = angular.module('study', []);
 
 
 study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location', 'IndexedDb', function($scope, $routeParams, $window, $location, IndexedDb) {
@@ -118,6 +118,27 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
         $scope.displayAnswer = false;
     };
 
+    $scope.getNewCards = function(allCards) {
+        var newCards = [];
+
+        for(var i = 0; i<allCards.length; i++) {
+            if(allCards[i].lastShow == null) {
+                newCards.push(allCards[i]);
+            }
+        }
+        return newCards;
+    };
+    $scope.getRepeatedCards = function(allCards) {
+        var repeatedCards = [];
+
+        for(var i = 0; i<allCards.length; i++) {
+            if(allCards[i].dirty == "true") {
+                repeatedCards.push(allCards[i]);
+            }
+        }
+        return repeatedCards;
+    };
+
     $scope.updateStatisticsAnswers = function(grade, dirty) {
         var today = moment();
         today.set({'hour': 0, 'minute': 0, 'second': 0});
@@ -165,7 +186,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
 
 
             //Pro statistiky kolekci--------------------
-        IndexedDb.findByProperty(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, 'collectionId', $scope.collectionId ).then(function(response) {
+        IndexedDb.findByProperty(IndexedDb.STORES.STATISTICS_ANSWERS_STORE, 'collectionId', parseInt($scope.collectionId) ).then(function(response) {
             var record = null;
             angular.forEach(response, function(value, key) {
                 if(moment(value.day).isSame(today, 'day')) {
@@ -176,7 +197,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
             if(record === null) { // neexistuje -> vytvořit
                 var newStatisticsToday = {
                     day: today,
-                    collectionId: $scope.collectionId,
+                    collectionId: parseInt($scope.collectionId),
                     again: 0, hard: 0, good: 0, easy: 0
                 };
                 if(dirty == "false") {

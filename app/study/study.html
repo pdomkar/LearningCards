@@ -1,24 +1,32 @@
 <section class="principal" role="region" data-ng-init="init()">
     <header>
         <menu type="toolbar">
-            <a ng-click="speakFrontCardText()" class="btn btn-default"><span class="icon" data-icon="sound-max" aria-label="speak card text">speak card text</span></a>
+            <a ng-click="speakFrontCardText()" class="btn btn-default"><span class="icon colorWhite" data-icon="sound-max" aria-label="speak card text">speak card text</span></a>
         </menu>
 
         <a ng-href="#/collections/{{collectionId}}"><span class="icon icon-back">Back</span></a>
         <h1>Study</h1>
     </header>
 
-    <section >
-
-<div>
-    <span>{{card.front}}</span>
-    <hr ng-show="displayAnswer">
-    <span ng-show="displayAnswer">{{card.back}}</span>
-    <!--{{cards}}-->
-</div>
+    <section class="pagebody">
+        <div style="margin-left: 1%; margin-top:2px; margin-bottom: -0.5%;">
+            <span style="margin-right:5px;" class="colorBlue">{{getNewCards(cards).length}}</span>
+            <span style="margin-right:5px;" class="colorRed">{{getRepeatedCards(cards).length}}</span>
+            <span style="margin-right:5px;">{{cards.length}}</span>
+        </div>
+        <div class="card-block">
+            <span>{{card.front}}</span>
+            <hr ng-show="displayAnswer">
+            <span ng-show="displayAnswer">{{card.back}}</span>
+            <!--{{cards}}-->
+        </div>
     </section>
-    <footer role="toolbar" class="" style="position:fixed; width:100%; bottom:0px; min-height:50px;">
-        <div class="row">
+    <footer role="toolbar" style="position:fixed; width:100%; bottom:0px; min-height:50px;">
+        <div class="row" style="
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;">
             <button ng-click="showAnswer()" class="col-xs-12" ng-show="!displayAnswer">Show answer</button>
             <div ng-show="displayAnswer">
                 <button ng-click="evaluateCard(0)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE.AGAIN}} (<5min)</button>
@@ -31,5 +39,4 @@
             </div>
         </div>
     </footer>
-
 </section>

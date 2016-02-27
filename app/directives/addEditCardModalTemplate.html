@@ -1,7 +1,9 @@
 <form role="dialog" data-type="confirm" name="addEditModal" class="addEditModal" ng-show='showModal' novalidate="">
     <section>
-        <h1 ng-if="addEditCardModalMode == 'add'">Add card</h1>
-        <h1 ng-if="addEditCardModalMode == 'update'">Update card</h1>
+        <header class="dialogHeader">
+            <h1 ng-if="addEditCardModalMode == 'add'">Add card</h1>
+            <h1 ng-if="addEditCardModalMode == 'update'">Update card</h1>
+        </header>
         <p>
             <input type="text" placeholder="Front side" data-ng-model="card.front" required />
             <input type="text" placeholder="Back side" data-ng-model="card.back" required/>

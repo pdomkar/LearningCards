@@ -22,7 +22,7 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
 
     var open = function() {
         var deferred = $q.defer();
-        var version = 5;
+        var version = 7;
         var request = indexedDB.open("lCApp", version);
 
         request.onupgradeneeded = function(e) {
@@ -190,44 +190,6 @@ IndexedDbServices.factory('IndexedDb', ['$window', '$q', '$rootScope', function(
                 var result = e.target.result;
                 if(result === null || result === undefined)
                 {
-                    deferred.resolve(data);
-                }
-                else{
-                    data.push(result.value);
-                    result.continue();
-                }
-            };
-
-            cursorRequest.onerror = function(e){
-                console.log(e.value);
-                deferred.reject("Something went wrong!!!");
-            };
-        }
-
-        return deferred.promise;
-    };
-
-    var findAllCardsWithColl = function() {
-        var deferred = $q.defer();
-        if(db === null || db === undefined) {
-            deferred.reject("IndexDB is not opened yet!");
-        } else{
-            var trans = db.transaction(['cards']);
-            var store = trans.objectStore('cards');
-            var data = [];
-
-            // Get everything in the store;
-            var keyRange = IDBKeyRange.lowerBound(0);
-            var cursorRequest = store.openCursor(keyRange);
-
-            cursorRequest.onsuccess = function(e) {
-                var result = e.target.result;
-                if(result === null || result === undefined)
-                {
-                    //add to data collectionName
-                    console.log(data);
-
-
                     deferred.resolve(data);
                 }
                 else{

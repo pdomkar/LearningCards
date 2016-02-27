@@ -1,20 +1,22 @@
 <section class="principal" role="region" data-ng-init="init()">
     <header>
-        <menu type="toolbar">
-        </menu>
-
         <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>Settings</h1>
     </header>
 
-    <section class="gaia-list fit scroll sticky">
-        <div class="row" style="border-bottom:1px solid orange; margin:2px;">
-            <label class="pack-switch">
-                <input type="checkbox" ng-model="settings.playVoiceText" ng-true-value="'true'" ng-false-value="'false'">
-                <span>Play text of card</span>
-            </label>
-            <div ng-show="settings.playVoiceText.toLowerCase() === 'true'">
-                <select ng-model="settings.languageOfVoice">
+    <section class="pagebody">
+        <div class="row settingsItem">
+            <div class="pull-left">Play text of card:</div>
+            <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <label class="pack-switch">
+                    <input type="checkbox" data-ng-model="settings.playVoiceText" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                    <span></span>
+                </label>
+            </div>
+            <br />
+            <div data-ng-show="settings.playVoiceText.toLowerCase() === 'true'" style="margin-left: 10px;">
+                <label for="languageOfVoice" style="margin-bottom: -10px;">Language of voice:</label>
+                <select data-ng-model="settings.languageOfVoice" id="languageOfVoice">
                     <option value="ca">ca - Catalan</option>
                     <option value="cs">cs - Czech</option>
                     <option value="de">de - German</option>
@@ -47,26 +49,25 @@
                     <option value="zh-yue">zh-yue - Cantonese Chinese</option>
                 </select>
 
-                <label class="pack-radio">
-                    <input type="radio" ng-model="settings.typeOfVoice" value="m2">
-                    <span>Male voice</span>
-                </label>
-                <label class="pack-radio">
-                    <input type="radio" ng-model="settings.typeOfVoice"  value="f2">
-                    <span>Female voice</span>
-                </label>
-                <h2 class="bb-docs">Volume: {{settings.volumeOfVoice}} %</h2>
+                <label class="pack-radio" style="margin-top: 10px;">Type of voice:</label>
+                <div class="switch pull-right">
+                    <input type="radio" class="switch-input" data-ng-model="settings.typeOfVoice" name=typeOfVoice" value="m2" id="m2">
+                    <label for="m2" class="switch-label switch-label-off">Male</label>
+                    <input type="radio" class="switch-input" data-ng-model="settings.typeOfVoice" name=typeOfVoice" value="f2" id="f2">
+                    <label for="f2" class="switch-label switch-label-on">Female</label>
+                    <span class="switch-selection"></span>
+                </div>
+
+                <br/>
+                <label for="range">Volume: <span style="margin-left:20px;">{{settings.volumeOfVoice}} %</span></label>
                 <section role="slider">
                     <label>0 %</label>
                     <label>100 %</label>
                     <div>
-                        <input type="range" ng-model="settings.volumeOfVoice">
+                        <input type="range" id="range" data-ng-model="settings.volumeOfVoice">
                     </div>
                 </section>
             </div>
-
         </div>
-
     </section>
-
 </section>

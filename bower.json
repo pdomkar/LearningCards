@@ -16,11 +16,12 @@
     "building-blocks":"gh-pages",
     "gaia-icons": "*",
     "angular-bootstrap": "*",
-    "angular-ui": "*",
     "moment": "2.10.x",
     "angular-filepicker": "gh-pages",
     "chartist":  "~0.9.0",
-    "Chart.js":  "1.0.x"
+    "Chart.js":  "1.0.x",
+    "unslider": "~2.0.3",
+    "jquery.event.swipe": "~0.5.3"
   },
   "resolutions": {
     "jquery": "3.0.x"

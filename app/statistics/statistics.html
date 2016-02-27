@@ -1,37 +1,38 @@
 <section class="principal" role="region" data-ng-init="init()">
     <header>
-        <menu type="toolbar">
-        </menu>
-
         <a ng-href="#/collections/"><span class="icon icon-back">Back</span></a>
         <h1>Statistics</h1>
     </header>
-    <br><br>
-    <div id="main">
-            <ul role="tablist" class="bb-tablist">
-                <li id="panel4" role="presentation">
-                    <a id="tab4" href="#/statistics/panel4" role="tab" aria-controls="tabpanel4">Cards Type</a>
-                    <!-- na taby pouzit material design --><br><br>
-                    <div id="tabpanel4" class="bb-tabpanel" role="tabpanel" aria-labelledby="tab4">
 
-                        <div class="ct-chart" id="chart1"></div>
-                        <ul class="ct-legend legend-pie"></ul>
-
-                        Answers
-                        <div style="width:100%">
-                            <div>
-                                <div class="ct-chart" id="chart2-6"  style="display: inline-block;width:100%"></div>
-                                <div class="ct-chart" id="chart2-13" style="display: inline-block;width:100%"></div>
-                                <div class="ct-chart" id="chart2-20" style="display: inline-block;width:100%"></div>
-                                <div class="ct-chart" id="chart2-27" style="display: inline-block;width:100%"></div>
-                            </div>
-                        </div>
-                        <ul class="ct-legend legend-bar"></ul>
-
-
-                    </div>
-                </li>
-            </ul>
+    <section class="pagebodyStatistics">
+        <div class="toolbar">
+            <menu type="toolbar" aria-expanded="true">
+                <li aria-controls="cardsType" class="activeTab" id="aaa">Cards Type</li>
+                <li aria-controls="answers">Answers</li>
+            </menu>
         </div>
 
+        <div id="cardsType" class="pagebody" aria-expanded="true" style="top: 2rem;">
+            <div class="container">
+                <div class="row">
+                    <ul class="ct-legend ct-legend-inline legend-pie"></ul>
+                    <div class="ct-chart" id="chart1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="answers" class="pagebody" style="top: 1rem;">
+            <ul class="ct-legend ct-legend-inline legend-bar"></ul>
+            <div class="my-graph-slider">
+                <ul>
+                    <li><div class="ct-chart" id="chart2-27" style="display: inline-block;width:100%; background: #ddd;"></div></li>
+                    <li><div class="ct-chart" id="chart2-20" style="display: inline-block;width:100%; background: #DDDDDD;"></div></li>
+                    <li><div class="ct-chart" id="chart2-13" style="display: inline-block;width:100%; background: #DDDDDD;"></div></li>
+                    <li><div class="ct-chart" id="chart2-6"  style="display: inline-block;width:100%; background: #ddd;"></div></li>
+                </ul>
+            </div>
+
+        </div>
+
+     </section>
 </section>

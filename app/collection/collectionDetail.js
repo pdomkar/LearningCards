@@ -1,6 +1,6 @@
 'use strict';
 
-var collectionDetail = angular.module('collectionDetail', ['mobile-angular-ui', 'globalDirectives']);
+var collectionDetail = angular.module('collectionDetail', ['globalDirectives']);
 
 
 collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', 'IndexedDb', '$window', function($scope, $routeParams, IndexedDb, $window) {
@@ -8,10 +8,14 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
     cd.collectionDetail = null;
     cd.cards = [];
     cd.newCards = [];
+    cd.repeatedCards = [];
     cd.cardsToStudy = [];
     $scope.addEditCardModalMode = "add";
     $scope.updateId = null;
     $scope.showModal = false;
+    $scope.showEditCollModal = false;
+    $scope.updateCollId = $routeParams.id;
+    $scope.editCollModalMode = "update";
     $scope.removeCardId = null;
     $scope.showConfirmRemove = false;
     $scope.showFilteredNewColl = false;
@@ -31,6 +35,11 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
 
     $scope.showFilteredNewCollModal = function() {
         $scope.showFilteredNewColl = true;
+    };
+
+    $scope.showEditCollModalFce = function(id) {
+        $scope.updateCollId = id;
+        $scope.showEditCollModal = true;
     };
 
 
@@ -108,13 +117,40 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
         });
     };
 
+    $scope.updateColl = function(coll) {
+        IndexedDb.update(IndexedDb.STORES.COLLECTION_STORE, coll).then(function() {
+            //Update collectionName in cadrs in this collection
+            IndexedDb.findByProperty(IndexedDb.STORES.CARD_STORE, "collectionId", parseInt(coll.id)).then(function(data) {
+                for(var i = 0; i<data.length; i++) {
+                    data[i].collectionName = coll.name;
+                    IndexedDb.update(IndexedDb.STORES.CARD_STORE, data[i]).then(function() {
+                    }, function(err) {
+                        $window.alert(err);
+                    });
+                }
+
+            }, function(err) {
+                $window.alert(err);
+            });
+            $scope.editCollModalMode = "update";
+            $scope.getById($routeParams.id);
+            $scope.refreshList();
+        }, function(err) {
+            $window.alert(err);
+        });
+    };
+
     $scope.$watch("cd.cardsToStudy",
         function ( newValue, oldValue ) {
             cd.newCards = [];
+            cd.repeatedCards = [];
 
             for(var i = 0; i<newValue.length; i++) {
                 if(newValue[i].lastShow == null) {
                     cd.newCards.push(newValue[i]);
+                }
+                if(newValue[i].dirty == "true") {
+                    cd.repeatedCards.push(newValue[i]);
                 }
             }
         }
