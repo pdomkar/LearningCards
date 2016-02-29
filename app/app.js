@@ -8,6 +8,7 @@ var learningCards = angular.module('lCApp', [
   'cardsHidden',
   'collectionDetail',
   'study',
+  'repeatCards',
   'settings',
   'collectionSettings',
   'statistics',
@@ -42,6 +43,10 @@ learningCards.config(['$routeProvider', '$compileProvider', function($routeProvi
     templateUrl: 'study/study.html',
     controller: 'StudyCtrl',
     controllerAs: 'sc'
+  }).when('/collections/:id/repeatCards', {
+    templateUrl: 'repeatCards/repeatCards.html',
+    controller: 'RepeatCardsCtrl',
+    controllerAs: 'rcc'
   }).when('/settings/', {
     templateUrl: 'settings/settings.html',
     controller: 'SettingsCtrl',

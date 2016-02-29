@@ -16,7 +16,7 @@
     "building-blocks":"gh-pages",
     "gaia-icons": "*",
     "angular-bootstrap": "*",
-    "moment": "2.10.x",
+    "angular-moment": "~0.10.3",
     "angular-filepicker": "gh-pages",
     "chartist":  "~0.9.0",
     "Chart.js":  "1.0.x",

@@ -10,7 +10,8 @@ module.exports = function(config){
       'app/components/**/*.js',
       'app/collections*/*.js',
       'app/services*/*.js',
-        'app/directives*/*.js'
+        'app/directives*/*.js',
+        'app/bower_components/moment/moment.js'
     ],
 
     autoWatch : true,

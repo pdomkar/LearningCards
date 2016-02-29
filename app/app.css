@@ -211,6 +211,30 @@ a:hover.btnStartStudy {
 	text-decoration: none;
 }
 
+a.btnRepeatCards {
+	display: block;
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 4px;
+	color: #fff;
+	font-weight: bold;
+	background-image: url(css/images/header.png);
+	padding: 3px 12px;
+	font-size: 17px;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+a:hover.btnRepeatCards {
+	opacity: 0.9;
+	color: #fff;
+	text-decoration: none;
+}
+
 .bb-tablist .bb-tabpanel {
 	position: absolute !important;
 	top: 100px !important;
