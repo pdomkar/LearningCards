@@ -34,7 +34,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
         IndexedDb.findByProperty(IndexedDb.STORES.COLLECTION_STORE, "hidden", "false").then(function(data){
             cl.collections=data;
         }, function(err){
-            $window.alert(err);
+
         });
     };
 

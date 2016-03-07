@@ -29,16 +29,39 @@ describe('indexed db test', function () {
 
 
     it('add item to store', function (done) {
-        console.log(10);
 
-            IndexedDb.getById(IndexedDb.STORES.COLLECTION_STORE, 1).then(function(value) {
-                console.log(13);
-               console.log(value)
-                done();
-                console.log(14);
-            });
+        //console.log('4');
+        //IndexedDb.findAll(IndexedDb.STORES.COLLECTION_STORE).then(function(value) {
+        //    console.log('5');
+        //    expect(value.length).toBe(0);
+        //    done();
+        //    console.log('6');
+        //}, function(err) {
+        //    console.log('7');
+        //});
+        //
+        //console.log('8');
+        //IndexedDb.add(IndexedDb.STORES.COLLECTION_STORE, {name: "AngličtinaTest", description: "baliček pro ajTest", hidden: "false"}).then(function(value) {
+        //    console.log(9);
+        //    done();
+        //}, function(err) {
+        //    done();
+        //    console.log(10);
+        //});
+        //console.log(11);
+        //IndexedDb.findAll(IndexedDb.STORES.COLLECTION_STORE).then(function(value) {
+        //    console.log(12);
+        //    expect(value.length).toBe(1);
+        //    expect(value[0].name).toBe("AngličtinaTest");
+        //    expect(value[0].description).toBe("baliček pro ajTest");
+        //    done();
+        //    console.log(13);
+        //}, function(err) {
+        //
+        //});
+        //console.log(14);
 
-        console.log(11);
+
     });
 
 

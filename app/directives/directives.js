@@ -28,7 +28,7 @@ globalDirectives.directive('confirmDialog', function() {
         link: link
     };
 }).directive('addEditCardModal', ['IndexedDb', '$window', function(IndexedDb, $window) {
-    function link(scope) {
+    function link(scope, element) {
         scope.cancel = function() {
             scope.showModal = false;
             scope.addEditCardModalMode = "";
@@ -36,63 +36,28 @@ globalDirectives.directive('confirmDialog', function() {
         };
 
         scope.showImages = function() {
-            var finder = new Applait.Finder({ type: "pictures", caseSensitive: false });
-            finder.search("anikaja.jpg");
-            finder.on("searchBegin", function (needle) {
-                console.log("sdf");
+
+            var pickImageActivity = new MozActivity({
+                name: "pick",
+                data: {
+                    type: []
+                }
             });
-            finder.on("fileFound", function (file, fileinfo, storageName) {
-                console.log("Found file " + fileinfo.name + " at " + fileinfo.path + " in " + storageName, file);
-            });
 
+            pickImageActivity.onsuccess = function() {
+                if (this.result.blob.type.indexOf("image") != -1) {
+                    scope.card.urlOfFrontImg = window.URL.createObjectURL(this.result.blob);
+                }
 
+            };
 
-                var sdcard = navigator.getDeviceStorage('sdcard');
-
-                var request = sdcard.usedSpace();
-                request.onsuccess = function () {
-                    // The result is expressed in bytes, let's turn it into Gigabytes
-                    var size = this.result / Math.pow(10,9);
-
-                    console.log("The files on your SDCard take " + size.toFixed(2) + "GB of space.");
-                };
-                request.onerror = function () {
-                    console.warn("Unable to get the space used by the SDCard: " + this.error.name);
-                };
-
-                // Let's retrieve files from last week.
-                var param = {
-                    since: new Date((new Date()) - 12*4*7*24*60*60*1000)
-                };
-
-                var cursor = sdcard.enumerate();
-
-                cursor.onsuccess = function () {
-
-                    if (this.result) {
-                        var file = this.result;
-                        console.log("File updated on: " + file.name);
-
-                        // Once we found a file we check if there are other results
-                        // Then we move to the next result, which calls the cursor
-                        // success possibly with the next file as result.
-                        this.continue();
-                    } else {
-                        console.log("nothing");
-                    }
-                };
-
-            //var request = pics.get("December_2015_1920x1080.jpg");
-            //request.onsuccess = function () {
-            //    var file = this.result;
-            //    console.log("Get the file: " + file.name);
-            //}
-            //
-            //request.onerror = function () {
-            //    console.warn("Unable to get the file: " + this.error);
-            //}
+            pickImageActivity.onerror = function() {
+                alert("Cannot pick the image");
+                console.log(this.result);
+            };
 
         };
+
         scope.add = function(card) {
             scope.addFce({newCard: card});
             scope.showModal = false;
@@ -106,6 +71,36 @@ globalDirectives.directive('confirmDialog', function() {
             scope.addEditCardModalMode = "";
             scope.card = {};
         };
+
+        scope.removeFrontImg = function() {
+            IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
+                data.urlOfFrontImg = '';
+                IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
+                    if (scope.addEditCardModalMode == "update") {
+                        scope.card.urlOfFrontImg = '';
+                    }
+                }, function(err) {
+                    $window.alert(err);
+                 });
+            }, function(err) {
+                $window.alert(err);
+            });
+        };
+        scope.removeBackImg = function() {
+            IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
+                data.urlOfBackImg = '';
+                IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
+                    if (scope.addEditCardModalMode == "update") {
+                        scope.card.urlOfBackImg = '';
+                    }
+                }, function(err) {
+                    $window.alert(err);
+                });
+            }, function(err) {
+                $window.alert(err);
+            });
+        };
+
 
         scope.$watch('addEditCardModalMode', function(addEditCardModalMode) {
             if (addEditCardModalMode == "update") {
@@ -271,6 +266,11 @@ globalDirectives.directive('confirmDialog', function() {
         };
 
         scope.add = function(coll) {
+            console.log(coll);
+            console.log(coll.name.length);
+            if(coll.name.length < 0 || coll.name.length > 50) {
+                $window.alert("Fill name of collection");
+            }
             scope.addFce({newColl: coll});
             scope.showModal = false;
             scope.addEditCollModalMode = "";
@@ -284,7 +284,6 @@ globalDirectives.directive('confirmDialog', function() {
             scope.addEditCollModalMode = "";
             scope.coll = {};
         };
-
 
         scope.$watch('addEditCollModalMode', function(addEditCollModalMode) {
             if (addEditCollModalMode == "update") {
@@ -310,6 +309,24 @@ globalDirectives.directive('confirmDialog', function() {
         },
         link: link
     };
+}]).directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                scope.$apply(function () {
+                    scope.fileread = changeEvent.target.files[0].name;
+                });
+            });
+            scope.$watch('fileread', function() {
+                if(scope.fileread == '') {
+                    element.val('');
+                }
+            });
+        }
+    }
 }]);
 
 

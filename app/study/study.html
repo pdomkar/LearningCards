@@ -4,38 +4,41 @@
             <a ng-click="speakFrontCardText()" class="btn btn-default"><span class="icon colorWhite" data-icon="sound-max" aria-label="speak card text">speak card text</span></a>
         </menu>
 
-        <a ng-href="#/collections/{{collectionId}}"><span class="icon icon-back">Back</span></a>
+        <a ng-click="goBack()" ng-href="#/collections/{{collectionId}}"><span class="icon icon-back">Back</span></a>
         <h1>Study</h1>
     </header>
 
     <section class="pagebody">
-        <div style="margin-left: 1%; margin-top:2px; margin-bottom: -0.5%;">
+        <div style="margin-left: 1%;" class="pull-left">
             <span style="margin-right:5px;" class="colorBlue">{{getNewCards(cards).length}}</span>
             <span style="margin-right:5px;" class="colorRed">{{getRepeatedCards(cards).length}}</span>
             <span style="margin-right:5px;">{{cards.length}}</span>
         </div>
+        <div ng-show="timer !== null && collectionSettings.limitTAnswer == 'true' && collectionSettings.showAnswerTime == 'true'" style="margin-right: 1%;" class="pull-right">
+            {{timer}} s
+        </div>
         <div class="card-block">
-            <span>{{card.front}}</span>
+            <span>{{card.front}}<br />
+                <img width="20%" src="{{card.urlOfFrontImg}}" alt=""></span>
             <hr ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">
-            <span ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">{{card.back}}</span>
+            <span ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">{{card.back}}<br />
+                <img width="20%" src="{{card.urlOfBackImg}}" alt=""></span>
             <!--{{cards}}-->
         </div>
     </section>
     <footer role="toolbar" style="position:fixed; width:100%; bottom:0px; min-height:50px;">
-        <div class="row" style="
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;">
-            <button ng-click="showAnswer()" class="col-xs-12" ng-show="!displayAnswer">Show answer</button>
-            <div ng-show="displayAnswer">
+        <div class="row" style=" position: absolute;  bottom: 0; left: 0; right: 0;">
+            <div ng-show="!displayAnswer" style="padding:0 15px;">
+                <button ng-click="showAnswer()" class="col-xs-12">Show answer</button>
+            </div>
+            <div ng-show="displayAnswer" style="padding:0 15px;">
                 <button ng-click="evaluateCard(0)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE[0]}} (<5min)</button>
                 <button ng-click="evaluateCard(3)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE[3]}} (1 day)</button>
 
-                <button ng-click="evaluateCard(0)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE[0]}} (<5min)</button>
-                <button ng-click="evaluateCard(1)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE[1]}} ({{card.interval*(1/3) | number:0}} days)</button>
-                <button ng-click="evaluateCard(3)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE[3]}} ({{card.interval*(2/3) | number:0}} days)</button>
-                <button ng-click="evaluateCard(5)" ng-if="card.interval >= 6" class="col-xs-3">{{CARD_GRADE[5]}} ({{card.interval}} days)</button>
+                <button ng-click="evaluateCard(0)" ng-if="card.interval >= 6" class="col-xs-3" style="font-size: 12px;">{{CARD_GRADE[0]}}<br />(<5min)</button>
+                <button ng-click="evaluateCard(1)" ng-if="card.interval >= 6" class="col-xs-3" style="font-size: 12px;">{{CARD_GRADE[1]}}<br />({{card.interval*(1/3) | number:0}} days)</button>
+                <button ng-click="evaluateCard(3)" ng-if="card.interval >= 6" class="col-xs-3" style="font-size: 12px;">{{CARD_GRADE[3]}}<br />({{card.interval*(2/3) | number:0}} days)</button>
+                <button ng-click="evaluateCard(5)" ng-if="card.interval >= 6" class="col-xs-3" style="font-size: 12px;">{{CARD_GRADE[5]}}<br />({{card.interval}} days)</button>
             </div>
         </div>
     </footer>

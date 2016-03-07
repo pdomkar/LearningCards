@@ -9,8 +9,9 @@
     <section class="pagebodyList">
        <div class="row cardItem" ng-repeat="collection in cl.collections">
             <a ng-href="#/collections/{{collection.id}}" class="collectionListItem">
-                <div class="pull-left"><b>{{collection.name}}</b><br />
-                    {{collection.description}}</div>
+                <div class="pull-left" style="overflow: auto;"><b>{{collection.name}}</b><br />
+                    {{collection.description}}
+                </div>
             </a>
 
            <div class="btn-group pull-right btn-group-xs" role="group">

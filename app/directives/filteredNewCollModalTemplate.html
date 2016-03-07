@@ -5,9 +5,15 @@
             <h1 data-ng-if="collId != null">Create new collection from collection</h1>
         </header>
         <p>
-            <input type="text" placeholder="Name" data-ng-model="filteredColl.name" required="" />
-            <input type="text" placeholder="Description" data-ng-model="filteredColl.description" />
-
+            <input type="text" placeholder="Name" data-ng-model="filteredColl.name" name="name" required="" ng-maxlength="50"/>
+            <span ng-show="filteredNewCollModal.$submitted || filteredNewCollModal.name.$dirty" style="margin: 0 0 1rem 1rem">
+                <span ng-show="filteredNewCollModal.name.$error.required" class="colorRed" style="margin-top:-1rem;display: block;">Fill name of collection</span>
+                <span ng-show="filteredNewCollModal.name.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 50 character</span>
+            </span>
+            <input type="text" placeholder="Description" data-ng-model="filteredColl.description" name="description" ng-maxlength="250"/>
+            <span ng-show="filteredNewCollModal.$submitted || filteredNewCollModal.description.$dirty" style="margin: 0 0 1rem 1rem">
+                <span ng-show="filteredNewCollModal.description.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 250 character</span>
+            </span>
             <div class="pagebodyListDialog">
                 <div class="row filterCollectionItem">
                     <div class="pull-left" style="font-size: 2rem; margin-top: 10px;">Select all:</div>

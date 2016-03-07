@@ -6,7 +6,7 @@ angular.module('IndexedDbServices', [])
     .config(['$provide', function ($provide) {
         $provide.constant('indexedDB', window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB);
     }])
-    .service('IndexedDb', function indexedDbServices($q, $rootScope, indexedDB) {
+    .service('IndexedDb',  ['$q', '$rootScope', 'indexedDB', function($q, $rootScope, indexedDB) {
         var service = this;
         var db;
 
@@ -29,7 +29,7 @@ angular.module('IndexedDbServices', [])
                 init = true;
             }
             var deferred = $q.defer();
-            var version = 3;
+            var version = 17;
             var request = indexedDB.open("lCApp", version);
 
             request.onupgradeneeded = function (e) {
@@ -58,7 +58,8 @@ angular.module('IndexedDbServices', [])
                 });
                 storeCard.createIndex("front", "front", {unique: false});
                 storeCard.createIndex("back", "back", {unique: false});
-                storeCard.createIndex("urlOfImgFront", "urlOfImgFront", {unique: false});
+                storeCard.createIndex("urlOfFrontImg", "urlOfFrontImg", {unique: false});
+                storeCard.createIndex("urlOfBackImg", "urlOfBackImg", {unique: false});
                 storeCard.createIndex("collectionId", "collectionId", {unique: false});
                 storeCard.createIndex("collectionName", "collectionName", {unique: false});
                 storeCard.createIndex("lastShow", "lastShow", {unique: false});
@@ -84,6 +85,15 @@ angular.module('IndexedDbServices', [])
                 storeSettings.createIndex("languageOfVoice", "languageOfVoice", {unique: false});
                 storeSettings.createIndex("typeOfVoice", "typeOfVoice", {unique: false});
                 storeSettings.createIndex("volumeOfVoice", "volumeOfVoice", {unique: false});
+                storeSettings.createIndex("displayAnswer", "displayAnswer", {unique: false});
+                storeSettings.createIndex("displayAnswerByRepeating", "displayAnswerByRepeating", {unique: false});
+                storeSettings.createIndex("limitTAnswer", "limitTAnswer", {unique: false});
+                storeSettings.createIndex("maximalAnswerTime", "maximalAnswerTime", {unique: false});
+                storeSettings.createIndex("showAnswerTime", "showAnswerTime", {unique: false});
+                storeSettings.createIndex("limitTAnswerByRepeating", "limitTAnswerByRepeating", {unique: false});
+                storeSettings.createIndex("maximalAnswerTimeByRepeating", "maximalAnswerTimeByRepeating", {unique: false});
+                storeSettings.createIndex("showAnswerTimeByRepeating", "showAnswerTimeByRepeating", {unique: false});
+                storeSettings.createIndex("filteringCards", "filteringCards", {unique: false});
 
                 if (db.objectStoreNames.contains(COLLECTION_SETTINGS_STORE)) {
                     db.deleteObjectStore(COLLECTION_SETTINGS_STORE);
@@ -97,6 +107,15 @@ angular.module('IndexedDbServices', [])
                 storeCollectionSettings.createIndex("languageOfVoice", "languageOfVoice", {unique: false});
                 storeCollectionSettings.createIndex("typeOfVoice", "typeOfVoice", {unique: false});
                 storeCollectionSettings.createIndex("volumeOfVoice", "volumeOfVoice", {unique: false});
+                storeCollectionSettings.createIndex("displayAnswer", "displayAnswer", {unique: false});
+                storeCollectionSettings.createIndex("displayAnswerByRepeating", "displayAnswerByRepeating", {unique: false});
+                storeCollectionSettings.createIndex("limitTAnswer", "limitTAnswer", {unique: false});
+                storeCollectionSettings.createIndex("maximalAnswerTime", "maximalAnswerTime", {unique: false});
+                storeCollectionSettings.createIndex("showAnswerTime", "showAnswerTime", {unique: false});
+                storeCollectionSettings.createIndex("limitTAnswerByRepeating", "limitTAnswerByRepeating", {unique: false});
+                storeCollectionSettings.createIndex("maximalAnswerTimeByRepeating", "maximalAnswerTimeByRepeating", {unique: false});
+                storeCollectionSettings.createIndex("showAnswerTimeByRepeating", "showAnswerTimeByRepeating", {unique: false});
+                storeCollectionSettings.createIndex("filteringCards", "filteringCards", {unique: false});
 
                 if (db.objectStoreNames.contains(STATISTICS_ANSWERS_STORE)) {
                     db.deleteObjectStore(STATISTICS_ANSWERS_STORE);
@@ -133,7 +152,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "dog",
                         back: "pes",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -147,7 +167,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "cat",
                         back: "kočka",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(),
@@ -161,7 +182,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "parrot",
                         back: "papoušek",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -175,7 +197,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "cow",
                         back: "kráva",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -189,7 +212,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "rabbit",
                         back: "králík",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -203,7 +227,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "girrafe",
                         back: "žirafa",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -217,7 +242,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "snake",
                         back: "had",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(),
@@ -231,7 +257,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "žítlaza",
                         back: "zizta",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 1,
                         collectionName: "Angličtina",
                         lastShow: null,
@@ -245,7 +272,8 @@ angular.module('IndexedDbServices', [])
                     cardAddStore.add({
                         front: "kocka",
                         back: "kočka",
-                        urlOfImgFront: null,
+                        urlOfFrontImg: '',
+                        urlOfBackImg: '',
                         collectionId: 2,
                         collectionName: "Němčina",
                         lastShow: null,
@@ -265,7 +293,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
 
                     //Store values in the newly created objectStore.
@@ -276,7 +312,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                     collectionSettingsAddStore.add({
                         id: 2,
@@ -284,7 +328,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: true
+                        displayAnswer: "true",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                     collectionSettingsAddStore.add({
                         id: 3,
@@ -292,7 +344,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                     collectionSettingsAddStore.add({
                         id: 4,
@@ -300,7 +360,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                     collectionSettingsAddStore.add({
                         id: 5,
@@ -308,7 +376,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                     collectionSettingsAddStore.add({
                         id: 6,
@@ -316,7 +392,15 @@ angular.module('IndexedDbServices', [])
                         languageOfVoice: "en/en",
                         typeOfVoice: "f2",
                         volumeOfVoice: 100,
-                        displayAnswer: false
+                        displayAnswer: "false",
+                        displayAnswerByRepeating: "false",
+                        limitTAnswer: "false",
+                        maximalAnswerTime: 60,
+                        showAnswerTime: "false",
+                        limitTAnswerByRepeating: "false",
+                        maximalAnswerTimeByRepeating: 60,
+                        showAnswerTimeByRepeating: "false",
+                        filteringCards: "true"
                     });
                 }
             };
@@ -340,7 +424,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store]);
                 var store = trans.objectStore(store);
@@ -383,7 +467,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store]);
                 var store = trans.objectStore(store);
@@ -429,7 +513,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store]);
                 var store = trans.objectStore(store);
@@ -468,7 +552,7 @@ angular.module('IndexedDbServices', [])
             var lowerBound = [collId, 'false', moment("01-01-1970", "MM-DD-YYYY").toDate()];
             var indexName = 'collectionId_hidden_nextShow';
             if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([service.STORES.CARD_STORE]);
                 var store = trans.objectStore(service.STORES.CARD_STORE);
@@ -506,7 +590,7 @@ angular.module('IndexedDbServices', [])
                 deferred.reject("ID can not be null, zero or negative.");
             }
             if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store]);
                 var store = trans.objectStore(store);
@@ -528,19 +612,16 @@ angular.module('IndexedDbServices', [])
         };
 
 
-        service.add = function (store, collection) {
-
-            //KOntrola vstupnich dat
-
+        service.add = function (store, data) {
             var deferred = $q.defer();
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store], "readwrite");
                 var store = trans.objectStore(store);
-                var request = store.add(collection);
+                var request = store.add(data);
 
                 request.onsuccess = function (e) {
                     deferred.resolve(e.target.result);
@@ -549,7 +630,7 @@ angular.module('IndexedDbServices', [])
 
                 request.onerror = function (e) {
                     console.log(e);
-                    deferred.reject("Something went wrong while adding new collection.");
+                    deferred.reject("Something went wrong while adding new data.");
                 };
             }
 
@@ -561,7 +642,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store], "readwrite");
                 var store = trans.objectStore(store);
@@ -593,7 +674,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store], "readwrite");
                 var store = trans.objectStore(store);
@@ -625,7 +706,7 @@ angular.module('IndexedDbServices', [])
             if (store === null || store === undefined) {
                 deferred.reject("Name of store canot be null or undefined");
             } else if (db === null || db === undefined) {
-                deferred.reject("IndexDB is not opened yet!");
+                console.log("IndexDB is not opened yet!");
             } else {
                 var trans = db.transaction([store], "readwrite");
                 var store = trans.objectStore(store);
@@ -662,4 +743,4 @@ angular.module('IndexedDbServices', [])
 
             return deferred.promise;
         };
-    });
+    }]);

@@ -164,9 +164,14 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
 
     $scope.init = function() {
         IndexedDb.open().then(function(){
-            $scope.filteredBaseCollId = $routeParams.id;
-            $scope.getById($routeParams.id);
-            $scope.refreshList();
+            IndexedDb.getById(IndexedDb.STORES.COLLECTION_SETTINGS_STORE, $routeParams.id).then(function (response) {
+                $scope.collectionSettings = response;
+                $scope.filteredBaseCollId = $routeParams.id;
+                $scope.getById($routeParams.id);
+                $scope.refreshList();
+            }, function (err) {
+                $window.alert(err);
+            });
         });
     }
 

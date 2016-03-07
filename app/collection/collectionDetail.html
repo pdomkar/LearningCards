@@ -34,9 +34,10 @@
             <a ng-href="#/collections/{{cd.collectionDetail.id}}/study" ng-if="cd.cardsToStudy.length > 0" class="btnStartStudy">Start Study</a>
             <a ng-href="#/collections/{{cd.collectionDetail.id}}/repeatCards" ng-if="cd.cards.length > 0" class="btnRepeatCards">Repeat cards</a>
         </div>
-        <div class="row cardItem">
+        <div class="row cardItem" ng-show="collectionSettings.filteringCards == 'true'">
             <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
         </div>
+
 
         <div class="row cardItem" ng-repeat="card in cd.cards | filter:searchText">
            <div class="pull-left">

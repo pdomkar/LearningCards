@@ -4,31 +4,36 @@
             <a ng-click="speakFrontCardText()" class="btn btn-default"><span class="icon colorWhite" data-icon="sound-max" aria-label="speak card text">speak card text</span></a>
         </menu>
 
-        <a ng-href="#/collections/{{collectionId}}"><span class="icon icon-back">Back</span></a>
+        <a ng-click="goBack()"><span class="icon icon-back">Back</span></a>
         <h1>Repeat cards</h1>
     </header>
 
     <section class="pagebody">
-        <div style="margin-left: 1%; margin-top:2px; margin-bottom: -0.5%;">
-            <span style="margin-right:5px;">{{cards.length}}</span>
+        <div style="margin-left: 1%;" class="pull-left">
+            <span>{{cards.length}}</span>
+        </div>
+        <div ng-show="timer !== null && collectionSettings.limitTAnswerByRepeating == 'true' && collectionSettings.showAnswerTimeByRepeating == 'true'" style="margin-right: 1%;" class="pull-right">
+            {{timer}} s
         </div>
         <div class="card-block">
-            <span>{{cards[0].front}}</span>
-            <hr ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">
-            <span ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">{{cards[0].back}}</span>
-            <!--{{cards}}-->
+            <span>{{cards[0].front}}<br />
+                <img width="20%" src="{{cards[0].urlOfFrontImg}}" alt="">
+            </span>
+            </span>
+            <hr ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">
+            <span ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">{{cards[0].back}}<br />
+                <img width="20%" src="{{cards[0].urlOfBackImg}}" alt="">
+            </span>
         </div>
     </section>
     <footer role="toolbar" style="position:fixed; width:100%; bottom:0px; min-height:50px;">
-        <div class="row" style="
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;">
-            <button ng-click="showAnswer()" class="col-xs-12" ng-show="!displayAnswer">Show answer</button>
-            <div ng-show="displayAnswer">
-                <button ng-click="evaluateCard(0)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE[0]}}</button>
-                <button ng-click="evaluateCard(3)" ng-if="card.interval < 6" class="col-xs-6">{{CARD_GRADE[3]}}</button>
+        <div class="row" style="position: absolute; bottom: 0; left: 0;  right: 0;">
+            <div ng-show="!displayAnswer" style="padding:0 15px;">
+                <button ng-click="showAnswer()" class="col-xs-12">Show answer</button>
+            </div>
+            <div ng-show="displayAnswer" style="padding:0 15px;">
+                <button ng-click="evaluateCard(0)" class="col-xs-6">{{CARD_GRADE[0]}}</button>
+                <button ng-click="evaluateCard(3)" class="col-xs-6">{{CARD_GRADE[3]}}</button>
             </div>
         </div>
     </footer>

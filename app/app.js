@@ -14,10 +14,11 @@ var learningCards = angular.module('lCApp', [
   'statistics',
   'collectionStatistics',
   'IndexedDbServices',
-  'globalDirectives'
+  'globalDirectives',
+  'LocalStorageModule'
 ]);
 
-learningCards.config(['$routeProvider', '$compileProvider', function($routeProvider,$compileProvider) {
+learningCards.config(['$routeProvider', '$compileProvider','localStorageServiceProvider', function($routeProvider,$compileProvider,localStorageServiceProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(file|https?|ftp|mailto|app):/);
   $routeProvider.when('/collections', {
     templateUrl: 'collections/collectionsList.html',
@@ -65,6 +66,7 @@ learningCards.config(['$routeProvider', '$compileProvider', function($routeProvi
     controllerAs: 'cstc'
   });
   $routeProvider.otherwise({redirectTo: '/collections'});
+  localStorageServiceProvider.setNotify(true, true)
 
 }]);
 

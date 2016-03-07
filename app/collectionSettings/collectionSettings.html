@@ -4,7 +4,7 @@
         <h1>Collection settings</h1>
     </header>
 
-    <section class="pagebody">
+    <section class="pagebodySettings">
         <div class="row settingsItem">
             <div class="pull-left">Play text of card:</div>
             <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
@@ -70,10 +70,84 @@
             </div>
         </div>
         <div class="row settingsItem">
-            <div class="pull-left">Display answer automatically without user input:</div>
+            <div class="pull-left settingsLeftText">Limit the time for answer:</div>
+            <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <label class="pack-switch">
+                    <input type="checkbox" data-ng-model="collectionSettings.limitTAnswer" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                    <span></span>
+                </label>
+            </div>
+            <br />
+            <div data-ng-show="collectionSettings.limitTAnswer.toLowerCase() === 'true'" style="margin-left: 10px;">
+                <label for="rangeTime">Maximal answer time: <span style="margin-left:20px;">{{collectionSettings.maximalAnswerTime}} sec</span></label>
+                <section role="slider">
+                    <label>0 s</label>
+                    <label>100 s</label>
+                    <div>
+                        <input type="range" id="rangeTime" data-ng-model="collectionSettings.maximalAnswerTime">
+                    </div>
+                </section>
+                <br />
+                <div class="pull-left settingsLeftText">Show answer time:</div>
+                <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                    <label class="pack-switch">
+                        <input type="checkbox" data-ng-model="collectionSettings.showAnswerTime" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row settingsItem">
+            <div class="pull-left settingsLeftText">Limit the time for answer by repeating:</div>
+            <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <label class="pack-switch">
+                    <input type="checkbox" data-ng-model="collectionSettings.limitTAnswerByRepeating" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                    <span></span>
+                </label>
+            </div>
+            <br />
+            <div data-ng-show="collectionSettings.limitTAnswerByRepeating.toLowerCase() === 'true'" style="margin-left: 10px;">
+                <label for="rangeTimeByRepeating">Maximal answer time: <span style="margin-left:20px;">{{collectionSettings.maximalAnswerTimeByRepeating}} sec</span></label>
+                <section role="slider">
+                    <label>0 s</label>
+                    <label>100 s</label>
+                    <div>
+                        <input type="range" id="rangeTimeByRepeating" data-ng-model="collectionSettings.maximalAnswerTimeByRepeating">
+                    </div>
+                </section>
+                <br />
+                <div class="pull-left settingsLeftText">Show answer time:</div>
+                <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                    <label class="pack-switch">
+                        <input type="checkbox" data-ng-model="collectionSettings.showAnswerTimeByRepeating" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row settingsItem">
+            <div class="pull-left settingsLeftText">Allow filtering cards in detail collection:</div>
+            <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <label class="pack-switch">
+                    <input type="checkbox" data-ng-model="collectionSettings.filteringCards" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                    <span></span>
+                </label>
+            </div>
+        </div>
+        <div class="row settingsItem">
+            <div class="pull-left settingsLeftText">Display answer automatically without user input:</div>
             <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
                 <label class="pack-switch">
                     <input type="checkbox" data-ng-model="collectionSettings.displayAnswer" data-ng-true-value="'true'" data-ng-false-value="'false'">
+                    <span></span>
+                </label>
+            </div>
+        </div>
+        <div class="row settingsItem">
+            <div class="pull-left settingsLeftText">Display answer automatically without user input by repeating:</div>
+            <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <label class="pack-switch">
+                    <input type="checkbox" data-ng-model="collectionSettings.displayAnswerByRepeating" data-ng-true-value="'true'" data-ng-false-value="'false'">
                     <span></span>
                 </label>
             </div>
