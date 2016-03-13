@@ -1,0 +1,59 @@
+section.sidebar > header {
+    background-image: url("images/header.png") ;
+    opacity: 0.9;
+    border-bottom: 0.1rem solid #323232;
+}
+section.sidebar > header > button.sidebar_trigger {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-width: 5rem;
+    width: auto;
+    height: 5rem;
+    border: none;
+    background: none;
+    padding: 0 1rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 5rem;
+    border-radius: 0;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: none;
+    font-style: italic;
+    float:left;
+}
+
+section.principal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index:1;
+  transition: 0.5s;
+}
+
+section.principal[aria-expanded=false] {
+  left: -100%;
+  right: 100%;
+}
+
+section.sidebar {
+   display: block;
+   position: absolute;
+   right: -0%;
+   left: 100%;
+   top: 0;
+   bottom: 0;
+   background: url("images/shadow.png") right top repeat-y;
+   transition: 0.5s;
+}
+
+section.sidebar[aria-expanded=true] {
+   left: 0;
+   right: 0;
+}
+

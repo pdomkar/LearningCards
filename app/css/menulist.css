@@ -1,0 +1,25 @@
+menu.menulist {
+  overflow: auto;
+  height: calc(100% - 9rem);
+   display: block;
+   padding: 0.5rem;
+   margin: 0.5rem;
+}
+
+menu.menulist a {
+    display: block;
+    overflow: hidden;
+    padding: 0% 1%;
+    color: #eee;
+    height: 5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+    font-style: oblique;
+   border-bottom: 1px solid #596068;
+   text-decoration: none;
+   margin: 2px 0px;
+ }
+
+menu.menulist a:first-child {
+   border-top: 1px solid #596068;
+}
