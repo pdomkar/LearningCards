@@ -53,8 +53,8 @@
   transition: 0.15s ease-out;
 }
 .switch-input:checked + .switch-label-on ~ .switch-selection {
-  left: 98px;
-  /* Note: left: 50% doesn't transition in WebKit */
+  left: 50%;
+  /* Note: left: 50% doesn't transition in WebKit   // original 98px; */
 }
 
 .switch-selection {

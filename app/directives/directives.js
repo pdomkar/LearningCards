@@ -137,6 +137,9 @@ globalDirectives.directive('confirmDialog', function() {
         scope.create = function() {
             scope.filteredColl.hidden = "false";
 
+            var pomReverseSide = scope.filteredColl.reverseSide;
+            delete scope.filteredColl.reverseSide;
+
             IndexedDb.add(IndexedDb.STORES.COLLECTION_STORE, scope.filteredColl).then(function(addedCollId) {
                 IndexedDb.getGlobalSettings().then(function(response) {
                     response.id = addedCollId;
@@ -165,6 +168,12 @@ globalDirectives.directive('confirmDialog', function() {
                                     data.ef = 2.5;
                                     data.numberOfIteration = 0;
                                     data.hidden = "false";
+
+                                    if(pomReverseSide == 'true') {
+                                        var pomFront = data.front;
+                                        data.front = data.back;
+                                        data.back = pomFront;
+                                    }
                                     IndexedDb.add(IndexedDb.STORES.CARD_STORE, data).then(function(addedId) {
                                         console.log("added" + addedId);
                                         getAddNext();
@@ -226,36 +235,6 @@ globalDirectives.directive('confirmDialog', function() {
             showFilteredNewCollModal: '='
         },
         link: link
-    };
-}]).directive('collectionUnique', ['IndexedDb', '$window', function(IndexedDb, $window) {
-    return {
-        require: 'ngModel',
-        restrict: 'A',
-        link: function(scope, elm, attrs, ctrl) {
-            ctrl.$validators.unique =
-                function(modelValue, viewValue) {
-                    scope.a = {
-                        val: "aaa",
-                        setValue: function(v) {
-                            this.val = v;
-                        },
-                        getValue: function() {
-                            return this.val;
-                        }
-                    };
-                    if(viewValue === undefined || viewValue === null) { viewValue = ""}
-                    var askForPromise =  IndexedDb.findByProperty(IndexedDb.STORES.COLLECTION_STORE, "name", viewValue);
-                    askForPromise.then(function (data) {
-                                console.log(scope.a.val);
-                                scope.a.setValue(data.length);
-                        console.log(scope.a.getValue());
-                            }, function (err) {
-                                $window.alert(err);
-                            });
-                    //dont workkkk TODO
-                    return true;
-                };
-        }
     };
 }]).directive('addEditCollModal', ['IndexedDb', '$window', function(IndexedDb, $window) {
     function link(scope) {

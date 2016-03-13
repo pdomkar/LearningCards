@@ -2,11 +2,11 @@
 /**
  * Created by Petr on 22. 11. 2015.
  */
-angular.module('IndexedDbServices', [])
+angular.module('IndexedDbServices', ['ImportServices'])
     .config(['$provide', function ($provide) {
         $provide.constant('indexedDB', window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB);
     }])
-    .service('IndexedDb',  ['$q', '$rootScope', 'indexedDB', function($q, $rootScope, indexedDB) {
+    .service('IndexedDb',  ['$q', '$rootScope', 'indexedDB', 'ImportService', function($q, $rootScope, indexedDB, ImportService) {
         var service = this;
         var db;
 
@@ -23,13 +23,15 @@ angular.module('IndexedDbServices', [])
             STATISTICS_ANSWERS_STORE: STATISTICS_ANSWERS_STORE
         };
 
+        var initDataColls = ["initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json"]; // en-cs-1-6
 
         service.open = function (init) {
+
             if(init === null || init === undefined) {
                 init = true;
             }
             var deferred = $q.defer();
-            var version = 17;
+            var version = 1;
             var request = indexedDB.open("lCApp", version);
 
             request.onupgradeneeded = function (e) {
@@ -134,158 +136,12 @@ angular.module('IndexedDbServices', [])
 
                 if(init) {
                     //Insert default / Init data -------------------------------
-
                     var transaction = e.target.transaction;
 
                     // Store values in the newly created objectStore.
                     var collAddStore = transaction.objectStore("collections");
-                    collAddStore.add({name: "Angličtina", description: "baliček pro aj", hidden: "false"});
-                    collAddStore.add({name: "Němčina", description: "baliček pro nemcina", hidden: "false"});
-                    collAddStore.add({name: "Francouzština", description: "baliček pro fr", hidden: "false"});
-                    collAddStore.add({name: "Španělština", description: "baliček pro šp", hidden: "false"});
-                    collAddStore.add({name: "Norština", description: "baliček pro norštinu", hidden: "false"});
-                    collAddStore.add({name: "Znaková řeč", description: "baliček pro znakovou řeč", hidden: "false"});
-
-                    //Store values in the newly created objectStore.
                     var cardAddStore = transaction.objectStore("cards");
-                    var unixStartDate = moment("01-01-1970", "MM-DD-YYYY").toDate();
-                    cardAddStore.add({
-                        front: "dog",
-                        back: "pes",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-                    cardAddStore.add({
-                        front: "cat",
-                        back: "kočka",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: moment("11-20-2015", "MM-DD-YYYY").toDate(),
-                        nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(),
-                        interval: 16,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.7,
-                        numberOfIteration: 3
-                    });
-                    cardAddStore.add({
-                        front: "parrot",
-                        back: "papoušek",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-                    cardAddStore.add({
-                        front: "cow",
-                        back: "kráva",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-                    cardAddStore.add({
-                        front: "rabbit",
-                        back: "králík",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-                    cardAddStore.add({
-                        front: "girrafe",
-                        back: "žirafa",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-                    cardAddStore.add({
-                        front: "snake",
-                        back: "had",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: moment("12-03-2015", "MM-DD-YYYY").toDate(),
-                        nextShow: moment("12-10-2015", "MM-DD-YYYY").toDate(),
-                        interval: 6,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.6,
-                        numberOfIteration: 2
-                    });
-                    cardAddStore.add({
-                        front: "žítlaza",
-                        back: "zizta",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 1,
-                        collectionName: "Angličtina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 2,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 1
-                    });
-                    cardAddStore.add({
-                        front: "kocka",
-                        back: "kočka",
-                        urlOfFrontImg: '',
-                        urlOfBackImg: '',
-                        collectionId: 2,
-                        collectionName: "Němčina",
-                        lastShow: null,
-                        nextShow: unixStartDate,
-                        interval: 0,
-                        hidden: "false",
-                        dirty: "false",
-                        ef: 2.5,
-                        numberOfIteration: 0
-                    });
-
-                    //Store values in the newly created objectStore.
+                    var collectionSettingsAddStore = transaction.objectStore("collection_settings");
                     var settingsAddStore = transaction.objectStore("settings");
                     settingsAddStore.add({
                         id: 1,
@@ -304,104 +160,7 @@ angular.module('IndexedDbServices', [])
                         filteringCards: "true"
                     });
 
-                    //Store values in the newly created objectStore.
-                    var collectionSettingsAddStore = transaction.objectStore("collection_settings");
-                    collectionSettingsAddStore.add({
-                        id: 1,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "false",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
-                    collectionSettingsAddStore.add({
-                        id: 2,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "true",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
-                    collectionSettingsAddStore.add({
-                        id: 3,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "false",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
-                    collectionSettingsAddStore.add({
-                        id: 4,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "false",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
-                    collectionSettingsAddStore.add({
-                        id: 5,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "false",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
-                    collectionSettingsAddStore.add({
-                        id: 6,
-                        playVoiceText: "true",
-                        languageOfVoice: "en/en",
-                        typeOfVoice: "f2",
-                        volumeOfVoice: 100,
-                        displayAnswer: "false",
-                        displayAnswerByRepeating: "false",
-                        limitTAnswer: "false",
-                        maximalAnswerTime: 60,
-                        showAnswerTime: "false",
-                        limitTAnswerByRepeating: "false",
-                        maximalAnswerTimeByRepeating: 60,
-                        showAnswerTimeByRepeating: "false",
-                        filteringCards: "true"
-                    });
+                    service.storeColl(collAddStore,collectionSettingsAddStore,cardAddStore,initDataColls,0);
                 }
             };
 
@@ -417,6 +176,42 @@ angular.module('IndexedDbServices', [])
 
             return deferred.promise;
         };
+
+        service.storeColl = function(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI) {
+            var unixStartDate = moment("01-01-1970", "MM-DD-YYYY").toDate();
+
+            var initData = new ImportService(initDataColls[pomI]);
+            initData.loadJson();
+
+            var collStoreReq = collAddStore.add(initData.getCollection());
+            collStoreReq.onsuccess = function (event) {
+                var collectionSettings = initData.getCollectionSettings();
+                collectionSettings.id = event.target.result;
+
+                var collSettingsStoreReq = collectionSettingsAddStore.add(collectionSettings);
+                collSettingsStoreReq.onsuccess = function (event) {
+                    var cards = initData.getCollectionCards();
+                    var cLength = cards.length;
+                    for (var j = 0; j < cLength; j++) {
+                        cards[j].nextShow = unixStartDate;
+                        cards[j].collectionId = event.target.result;
+                        cards[j].collectionName = initData.getCollection().name;
+                        cardAddStore.add(cards[j]);
+
+                        if((j+1 == cLength) && (initDataColls.length >= pomI + 2)) {
+                            service.storeColl(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI + 1);
+                        }
+                    }
+                };
+                collSettingsStoreReq.onerror = function (event) {
+                    console.log(event);
+                };
+            };
+            collStoreReq.onerror = function (event) {
+                console.log(event);
+            };
+        };
+
 
 
         service.findAll = function (store) {
@@ -630,7 +425,11 @@ angular.module('IndexedDbServices', [])
 
                 request.onerror = function (e) {
                     console.log(e);
-                    deferred.reject("Something went wrong while adding new data.");
+                    if(e.srcElement.error.name == "ConstraintError") {
+                        deferred.reject("Name of collection already exists. Please type another.");
+                    } else {
+                        deferred.reject("Something went wrong while adding new data.");
+                    }
                 };
             }
 

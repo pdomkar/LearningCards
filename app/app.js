@@ -14,6 +14,7 @@ var learningCards = angular.module('lCApp', [
   'statistics',
   'collectionStatistics',
   'IndexedDbServices',
+  'ImportServices',
   'globalDirectives',
   'LocalStorageModule'
 ]);

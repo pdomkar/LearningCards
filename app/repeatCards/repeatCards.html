@@ -17,12 +17,14 @@
         </div>
         <div class="card-block">
             <span>{{cards[0].front}}<br />
-                <img width="20%" src="{{cards[0].urlOfFrontImg}}" alt="">
+                <img ng-if="cards[0].urlOfFrontImg.length > 0" width="20%" src="{{cards[0].urlOfFrontImg}}" alt="Image not available">
+                <img ng-if="cards[0].urlOfFrontImg.length == 0" width="20%" src="{{cards[0].urlOfFrontImg}}" alt="">
             </span>
             </span>
             <hr ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">
             <span ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">{{cards[0].back}}<br />
-                <img width="20%" src="{{cards[0].urlOfBackImg}}" alt="">
+                <img ng-if="cards[0].urlOfBackImg.length > 0" width="20%" src="{{cards[0].urlOfBackImg}}" alt="Image not available">
+                <img ng-if="cards[0].urlOfBackImg.length == 0" width="20%" src="{{cards[0].urlOfBackImg}}" alt="">
             </span>
         </div>
     </section>

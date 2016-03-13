@@ -5,7 +5,7 @@
             <h1 ng-if="addEditCollModalMode == 'update'">Update collection</h1>
         </header>
         <p>
-            <input type="text" placeholder="Name" name="name" data-ng-model="coll.name" collection-unique="" required="" ng-maxlength="50" style="margin-top:0.5rem;"/>
+            <input type="text" placeholder="Name" name="name" data-ng-model="coll.name" required="" ng-maxlength="50" style="margin-top:0.5rem;"/>
             <span ng-show="addEditModal.$submitted || addEditModal.name.$dirty" style="margin: 0 0 1rem 1rem">
                 <span ng-show="addEditModal.name.$error.required" class="colorRed" style="margin-top:-1rem;display: block;">Fill name of collection</span>
                 <span ng-show="addEditModal.name.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 50 character</span>

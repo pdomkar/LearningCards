@@ -14,6 +14,14 @@
             <span ng-show="filteredNewCollModal.$submitted || filteredNewCollModal.description.$dirty" style="margin: 0 0 1rem 1rem">
                 <span ng-show="filteredNewCollModal.description.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 250 character</span>
             </span>
+
+            <div class="switch" style="width:100%; margin-top:0px;">
+                <input type="radio" class="switch-input" data-ng-model="filteredColl.reverseSide" name="reverseSide" value="false" id="reverseSideFalse">
+                <label for="reverseSideFalse" style="width:50%;" class="switch-label switch-label-off">Original side</label>
+                <input type="radio" class="switch-input" data-ng-model="filteredColl.reverseSide" name="reverseSide" value="true" id="reverseSideTrue">
+                <label for="reverseSideTrue" style="width:50%;" class="switch-label switch-label-on">Reverse side</label>
+                <span class="switch-selection" style="width:50%;"></span>
+            </div>
             <div class="pagebodyListDialog">
                 <div class="row filterCollectionItem">
                     <div class="pull-left" style="font-size: 2rem; margin-top: 10px;">Select all:</div>
