@@ -19,13 +19,13 @@
         </div>
         <div class="card-block">
             <span>{{card.front}}<br />
-                <img ng-if="card.urlOfFrontImg.length > 0" width="20%" src="{{card.urlOfFrontImg}}" alt="Image not available"></span>
-                <img ng-if="card.urlOfFrontImg.length == 0" width="20%" src="{{card.urlOfFrontImg}}" alt="">
+                <img ng-if="card.urlOfFrontImg.length > 0" style="max-width: 80px;max-height: 80px;" src="{{card.urlOfFrontImg}}" alt="Image not available"></span>
+                <img ng-if="card.urlOfFrontImg.length == 0" style="max-width: 80px;max-height: 80px;" width="20%" src="{{card.urlOfFrontImg}}" alt="">
             </span>
             <hr ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">
             <span ng-show="(collectionSettings.displayAnswer == 'true') || displayAnswer">{{card.back}}<br />
-                <img ng-if="card.urlOfBackImg.length > 0" width="20%" src="{{card.urlOfBackImg}}" alt="Image not available">
-                <img ng-if="card.urlOfBackImg.length == 0" width="20%" src="{{card.urlOfBackImg}}" alt="">
+                <img ng-if="card.urlOfBackImg.length > 0" style="max-width: 80px;max-height: 80px;" width="20%" src="{{card.urlOfBackImg}}" alt="Image not available">
+                <img ng-if="card.urlOfBackImg.length == 0" style="max-width: 80px;max-height: 80px;" width="20%" src="{{card.urlOfBackImg}}" alt="">
             </span>
         </div>
     </section>

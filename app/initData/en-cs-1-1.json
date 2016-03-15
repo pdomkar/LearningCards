@@ -1,10 +1,25 @@
 {
   "collection": {
     "name": "English - Czech 1-1",
-    "description": "Project:Project1 - Unit1",
+    "description": "Project1 - Unit1",
     "hidden": "false"
   },
   "cards": [
+    {
+      "front": "from",
+      "back": "z, od",
+      "urlOfFrontImg": "",
+      "urlOfBackImg": "",
+      "collectionId": 1,
+      "collectionName": "English - Czech 1-1",
+      "lastShow": null,
+      "nextShow": "01-01-1970",
+      "interval": 2,
+      "hidden": "false",
+      "dirty": "false",
+      "ef": 2.5,
+      "numberOfIteration": 1
+    },
     {
       "front": "from",
       "back": "z, od",

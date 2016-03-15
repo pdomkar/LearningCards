@@ -20,15 +20,15 @@ describe('indexed db test', function () {
         });
         console.log(2);
     });
+    //
+    //it('opens', function () {
+    //    expect(idbOpened).toBe(true);
+    //    console.log(4);
+    //});
 
-    it('opens', function () {
-        expect(idbOpened).toBe(true);
-        console.log(4);
-    });
 
 
-
-    it('add item to store', function (done) {
+    //it('add item to store', function (done) {
 
         //console.log('4');
         //IndexedDb.findAll(IndexedDb.STORES.COLLECTION_STORE).then(function(value) {
@@ -62,7 +62,7 @@ describe('indexed db test', function () {
         //console.log(14);
 
 
-    });
+    //});
 
 
     //it('find all data from STORE', function () {

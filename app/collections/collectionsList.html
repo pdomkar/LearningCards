@@ -4,13 +4,17 @@
             <a ng-click="showAddCollModal()" class="btn btn-default"><span class="icon icon-add">add</span></a>
             <button class="sidebar_trigger"><span class="icon icon-menu">show sidebar</span></button>
         </menu>
+        <span style="float:left;line-height: 5rem;margin-left:0.5rem;"><img src="images/fcards-icon-32.png"></span>
         <h1>Collections</h1>
     </header>
     <section class="pagebodyList">
-       <div class="row cardItem" ng-repeat="collection in cl.collections">
+        <div class="row cardItem" ng-show="settings.filteringCollections == 'true'">
+            <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
+        </div>
+       <div class="row cardItem" ng-repeat="collection in cl.collections | filter:searchText">
             <a ng-href="#/collections/{{collection.id}}" class="collectionListItem">
-                <div class="pull-left" style="overflow: auto;"><b>{{collection.name}}</b><br />
-                    {{collection.description}}
+                <div class="pull-left collectionRow" style="overflow: auto;"><b>{{collection.name}}</b><br />
+                    <span>{{collection.description}}</span>
                 </div>
             </a>
 
@@ -30,7 +34,7 @@
         <h1>Menu</h1>
     </header>
     <menu class="menulist">
-        <a ng-href="#/collections/hidden/">Display hidden collecction</a>
+        <a ng-href="#/collections/hidden/">Display hidden collection</a>
         <a ng-href="#/cards/">Show all cards</a>
         <a href="" ng-click="showFilteredNewCollModal()">Create filtered collection</a>
         <a ng-href="#/settings/">Settings</a>

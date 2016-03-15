@@ -10,7 +10,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
     $scope.displayAnswer = false;
     $scope.timer = null;
 
-    const CARD_GRADE = { // PREMISTIt do definice konstatnt
+    const CARD_GRADE = {
         0: 'Again',
         1: 'Hard',
         3: 'Good',

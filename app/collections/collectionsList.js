@@ -98,9 +98,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
     $scope.remove = function(id) {
         IndexedDb.remove(IndexedDb.STORES.COLLECTION_STORE, id).then(function() {
             //collection deleted, then delete all dependent cards
-            console.log(id);
             IndexedDb.removeBy(IndexedDb.STORES.CARD_STORE, "collectionId", id).then(function() {
-
             }, function(err) {
                 $window.alert(err);
             });
@@ -121,7 +119,12 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
 
     $scope.init = function(){
         IndexedDb.open().then(function(){
-            $scope.refreshList();
+            IndexedDb.getGlobalSettings().then(function (response) {
+                $scope.settings = response;
+                $scope.refreshList();
+            }, function (err) {
+                $window.alert(err);
+            });
         }, function(err) {
             console.log("not open db");
         });

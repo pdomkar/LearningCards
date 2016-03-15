@@ -10,33 +10,64 @@ angular.module('ImportServices', [])
     }]);
 
     var Import = function ( pathToJson ) {
-        this.pathToJson = pathToJson;
-        this.json = {};
+        var pathToJson = pathToJson;
+        var json = {};
 
         this.setPath = function(path) {
-            this.pathToJson = path;
+            pathToJson = path;
+        };
+        this.getPath = function() {
+            return pathToJson;
         };
 
         this.loadJson = function() {
             $.ajaxSetup( { "async": false } );
-            this.json = JSON.parse((JSON.parse(JSON.stringify($.getJSON(pathToJson))).responseText));
+
+            json = $.parseJSON($.getJSON(pathToJson).responseText);
             $.ajaxSetup( { "async": true } );
         };
 
-        this.getPath = function() {
-            return this.pathToJson;
+        this.setJson = function(data) {
+            json = data;
         };
         this.getJson = function() {
-            return this.json;
+            return json;
         };
         this.getCollection = function() {
-            return this.json.collection; // osetrit ze existuje
+            if(json.collection !== undefined) {
+                return json.collection;
+            } else {
+                return null; //nothing insert
+            }
         };
         this.getCollectionCards = function() {
-            return this.json.cards;
+            if(json.cards !== undefined) {
+                return json.cards;
+            } else {
+                return [];
+            }
         };
         this.getCollectionSettings = function() {
-            return this.json.settings;
+            if(json.settings !== undefined) {
+                return json.settings;
+            } else {
+                return {
+                    id: 1,
+                    playVoiceText: 'true',
+                    languageOfVoice: 'en/en',
+                    typeOfVoice: 'f2',
+                    volumeOfVoice: 100,
+                    displayAnswer: 'false',
+                    displayAnswerByRepeating: 'false',
+                    limitTAnswer: 'false',
+                    maximalAnswerTime: 60,
+                    showAnswerTime: 'false',
+                    limitTAnswerByRepeating: 'false',
+                    maximalAnswerTimeByRepeating: 60,
+                    showAnswerTimeByRepeating: 'false',
+                    filteringCards: 'true'
+                };
+            }
         };
 
     };

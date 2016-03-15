@@ -23,7 +23,7 @@ angular.module('IndexedDbServices', ['ImportServices'])
             STATISTICS_ANSWERS_STORE: STATISTICS_ANSWERS_STORE
         };
 
-        var initDataColls = ["initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json"]; // en-cs-1-6
+        var initDataColls = ["initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json", "initData/en-cs-1-6.json", "initData/en-cs-2-0.json", "initData/en-cs-2-1.json", "initData/en-cs-2-2.json", "initData/en-cs-2-3.json", "initData/en-cs-2-4.json", "initData/en-cs-2-5.json", "initData/en-cs-2-6.json", "initData/en-cs-3-0.json", "initData/en-cs-3-1.json", "initData/en-cs-3-2.json", "initData/en-cs-3-3.json", "initData/en-cs-3-4.json", "initData/en-cs-3-5.json", "initData/en-cs-3-6.json", "initData/en-cs-3-7.json", "initData/en-cs-3-8.json", "initData/en-cs-4-0.json", "initData/en-cs-4-1.json", "initData/en-cs-4-2.json", "initData/en-cs-4-3.json", "initData/en-cs-4-4.json", "initData/en-cs-4-5.json", "initData/en-cs-4-6.json", "initData/en-cs-4-7.json", "initData/en-cs-4-8.json", "initData/en-cs-5-0.json", "initData/en-cs-5-1.json", "initData/en-cs-5-2.json", "initData/en-cs-5-3.json", "initData/en-cs-5-4.json", "initData/en-cs-5-5.json", "initData/en-cs-5-6.json", "initData/en-cs-5-7.json", "initData/en-cs-5-8.json"];
 
         service.open = function (init) {
 
@@ -95,6 +95,7 @@ angular.module('IndexedDbServices', ['ImportServices'])
                 storeSettings.createIndex("limitTAnswerByRepeating", "limitTAnswerByRepeating", {unique: false});
                 storeSettings.createIndex("maximalAnswerTimeByRepeating", "maximalAnswerTimeByRepeating", {unique: false});
                 storeSettings.createIndex("showAnswerTimeByRepeating", "showAnswerTimeByRepeating", {unique: false});
+                storeSettings.createIndex("filteringCollections", "filteringCollections", {unique: false});
                 storeSettings.createIndex("filteringCards", "filteringCards", {unique: false});
 
                 if (db.objectStoreNames.contains(COLLECTION_SETTINGS_STORE)) {
@@ -157,6 +158,7 @@ angular.module('IndexedDbServices', ['ImportServices'])
                         limitTAnswerByRepeating: "false",
                         maximalAnswerTimeByRepeating: 60,
                         showAnswerTimeByRepeating: "false",
+                        filteringCollections: "true",
                         filteringCards: "true"
                     });
 
@@ -179,37 +181,47 @@ angular.module('IndexedDbServices', ['ImportServices'])
 
         service.storeColl = function(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI) {
             var unixStartDate = moment("01-01-1970", "MM-DD-YYYY").toDate();
-
             var initData = new ImportService(initDataColls[pomI]);
-            initData.loadJson();
 
-            var collStoreReq = collAddStore.add(initData.getCollection());
-            collStoreReq.onsuccess = function (event) {
-                var collectionSettings = initData.getCollectionSettings();
-                collectionSettings.id = event.target.result;
+            try {
+                initData.loadJson();
 
-                var collSettingsStoreReq = collectionSettingsAddStore.add(collectionSettings);
-                collSettingsStoreReq.onsuccess = function (event) {
-                    var cards = initData.getCollectionCards();
-                    var cLength = cards.length;
-                    for (var j = 0; j < cLength; j++) {
-                        cards[j].nextShow = unixStartDate;
-                        cards[j].collectionId = event.target.result;
-                        cards[j].collectionName = initData.getCollection().name;
-                        cardAddStore.add(cards[j]);
+                var collStoreReq = collAddStore.add(initData.getCollection());
+                collStoreReq.onsuccess = function (event) {
+                    var collectionSettings = initData.getCollectionSettings();
+                    collectionSettings.id = event.target.result;
 
-                        if((j+1 == cLength) && (initDataColls.length >= pomI + 2)) {
-                            service.storeColl(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI + 1);
+                    var collSettingsStoreReq = collectionSettingsAddStore.add(collectionSettings);
+                    collSettingsStoreReq.onsuccess = function (event) {
+                        var cards = initData.getCollectionCards();
+                        var cLength = cards.length;
+                        for (var j = 0; j < cLength; j++) {
+                            cards[j].nextShow = unixStartDate;
+                            cards[j].collectionId = event.target.result;
+                            cards[j].collectionName = initData.getCollection().name;
+                            cardAddStore.add(cards[j]);
+
+                            if ((j + 1 == cLength) && (initDataColls.length >= pomI + 2)) {
+                                service.storeColl(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI + 1);
+                            }
                         }
+                    };
+                    collSettingsStoreReq.onerror = function (event) {
+                        console.log(event);
+                    };
+                };
+                collStoreReq.onerror = function (event) {
+                    console.log(event);
+                    if ((initDataColls.length >= pomI + 2)) {
+                        service.storeColl(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI + 1);
                     }
                 };
-                collSettingsStoreReq.onerror = function (event) {
-                    console.log(event);
-                };
-            };
-            collStoreReq.onerror = function (event) {
-                console.log(event);
-            };
+            } catch(err) {
+                console.log(err);
+                if ((initDataColls.length >= pomI + 2)) {
+                    service.storeColl(collAddStore, collectionSettingsAddStore, cardAddStore, initDataColls, pomI + 1);
+                }
+            }
         };
 
 

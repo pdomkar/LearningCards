@@ -11,7 +11,8 @@ module.exports = function(config){
       'app/collections*/*.js',
       'app/services*/*.js',
         'app/directives*/*.js',
-        'app/bower_components/moment/moment.js'
+        'app/bower_components/moment/moment.js',
+      'app/bower_components/jquery/dist/jquery.min.js'
     ],
 
     autoWatch : true,

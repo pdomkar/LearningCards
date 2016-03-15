@@ -175,7 +175,6 @@ globalDirectives.directive('confirmDialog', function() {
                                         data.back = pomFront;
                                     }
                                     IndexedDb.add(IndexedDb.STORES.CARD_STORE, data).then(function(addedId) {
-                                        console.log("added" + addedId);
                                         getAddNext();
                                     }, function(err) {
                                         $window.alert(err);
@@ -245,8 +244,6 @@ globalDirectives.directive('confirmDialog', function() {
         };
 
         scope.add = function(coll) {
-            console.log(coll);
-            console.log(coll.name.length);
             if(coll.name.length < 0 || coll.name.length > 50) {
                 $window.alert("Fill name of collection");
             }
