@@ -39,6 +39,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
     };
 
     $scope.add = function(collection) {
+        collection.hidden = "false";
         IndexedDb.add(IndexedDb.STORES.COLLECTION_STORE, collection).then(function(addedId) {
             IndexedDb.getGlobalSettings().then(function(response) {
                 response.id = addedId;

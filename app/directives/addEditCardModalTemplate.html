@@ -2,7 +2,7 @@
     <section>
         <header class="dialogHeader">
             <h1 ng-if="addEditCardModalMode == 'add'">Add card</h1>
-            <h1 ng-if="addEditCardModalMode == 'update'">Update card</h1>
+            <h1 ng-if="addEditCardModalMode == 'update'">Edit card</h1>
         </header>
         <p>
             <input type="text" placeholder="Front side" data-ng-model="card.front" name="front" ng-required="!card.urlOfFrontImg" ng-maxlength="50"/>
@@ -11,9 +11,9 @@
                 <span ng-show="addEditModal.front.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 50 character</span>
             </span>
             <input type="text" ng-model="card.urlOfFrontImg" placeholder="Url of image front side"/>
-                <!--<button ng-click="showImages()">image</button>-->
-                <!--<input type="file" fileread="card.urlOfFrontImg" class="pull-left" style="margin: -0.5rem 0 1.5rem 0;"/>-->
-                <!--<br /><span ng-if="addEditCardModalMode == 'update' && card.urlOfFrontImg != ''">{{card.urlOfFrontImg}}<i data-icon="close" class="btn btn-default btn-xs pointer pull-left" style="margin: -0.5rem 0 1.5rem 0;" aria-label="Remove" ng-click="removeFrontImg()"></i></span>-->
+                <button ng-click="showImages()">image</button>
+                <input type="file" fileread="card.urlOfFrontImg" class="pull-left" style="margin: -0.5rem 0 1.5rem 0;"/>
+                <br /><span ng-if="addEditCardModalMode == 'update' && card.urlOfFrontImg != ''">{{card.urlOfFrontImg}}<i data-icon="close" class="btn btn-default btn-xs pointer pull-left" style="margin: -0.5rem 0 1.5rem 0;" aria-label="Remove" ng-click="removeFrontImg()"></i></span>
 
             <input type="text" placeholder="Back side" data-ng-model="card.back" name="back" ng-required="!card.urlOfBackImg" ng-maxlength="50"/>
             <span ng-show="addEditModal.$submitted || addEditModal.back.$dirty" style="margin: 0 0 1rem 1rem">
@@ -28,6 +28,6 @@
     <menu>
         <button ng-click="cancel()">Cancel</button>
         <button class="recommend" ng-click="add(card)" ng-disabled="addEditModal.$invalid" ng-if="addEditCardModalMode == 'add'">Add</button>
-        <button class="recommend" ng-click="update(card)" ng-disabled="addEditModal.$invalid" ng-if="addEditCardModalMode == 'update'">Update</button>
+        <button class="recommend" ng-click="update(card)" ng-disabled="addEditModal.$invalid" ng-if="addEditCardModalMode == 'update'">Edit</button>
     </menu>
 </form>

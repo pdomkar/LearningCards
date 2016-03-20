@@ -2,7 +2,7 @@
     <section>
         <header class="dialogHeader">
             <h1 ng-if="addEditCollModalMode == 'add'">Add collection</h1>
-            <h1 ng-if="addEditCollModalMode == 'update'">Update collection</h1>
+            <h1 ng-if="addEditCollModalMode == 'update'">Edit collection</h1>
         </header>
         <p>
             <input type="text" placeholder="Name" name="name" data-ng-model="coll.name" required="" ng-maxlength="50" style="margin-top:0.5rem;"/>
@@ -19,7 +19,7 @@
     <menu>
         <button ng-click="cancel()">Cancel</button>
         <button class="recommend" ng-click="add(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'add'">Add</button>
-        <button class="recommend" ng-click="update(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'update'">Update</button>
+        <button class="recommend" ng-click="update(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'update'">Edit</button>
 
     </menu>
 </form>

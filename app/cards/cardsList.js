@@ -11,7 +11,11 @@ cardsList.controller('CardsListCtrl', ['$scope', '$routeParams', 'IndexedDb', '$
     $scope.showModal = false;
     $scope.removeCardId = null;
     $scope.showConfirmRemove = false;
+    $scope.totalDisplayed = 100;
 
+    $scope.loadMore = function () {
+        $scope.totalDisplayed += 100;
+    };
 
     $scope.showUpdateCardModal = function(id) {
         $scope.updateId = id;

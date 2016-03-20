@@ -61,7 +61,6 @@
     </header>
     <menu class="menulist">
         <a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a>
-        <a href="" ng-click="showEditCollModalFce(updateCollId)" class="item">Edit collection</a>
         <a href="" ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a>
         <a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a>
         <a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" class="item">Collection statistics</a>
@@ -71,4 +70,3 @@
 <filtered-new-coll-modal coll-id="filteredBaseCollId" show-filtered-new-coll-modal="showFilteredNewColl"></filtered-new-coll-modal>
 <add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>
 <confirm-dialog title="Delete card" body="Do you realy want to delete the card?" btn-cancel="Cancel" btn-confirm="Delete" show-confirm="showConfirmRemove" confirm-fce="remove(removeCardId)" ></confirm-dialog>
-<add-edit-coll-modal add-edit-coll-modal-mode="editCollModalMode" update-id="updateCollId" add-fce="" update-fce="updateColl(newColl)" show-modal="showEditCollModal"></add-edit-coll-modal>

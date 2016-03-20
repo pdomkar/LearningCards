@@ -40,13 +40,14 @@ globalDirectives.directive('confirmDialog', function() {
             var pickImageActivity = new MozActivity({
                 name: "pick",
                 data: {
-                    type: []
+                    type: ["image/*"]
                 }
             });
 
             pickImageActivity.onsuccess = function() {
                 if (this.result.blob.type.indexOf("image") != -1) {
-                    scope.card.urlOfFrontImg = window.URL.createObjectURL(this.result.blob);
+                    console.log(this.result);
+                    scope.card.urlOfFrontImg = this.result.name;
                 }
 
             };
@@ -59,6 +60,7 @@ globalDirectives.directive('confirmDialog', function() {
         };
 
         scope.add = function(card) {
+            console.log(card);
             scope.addFce({newCard: card});
             scope.showModal = false;
             scope.addEditCardModalMode = "";
@@ -209,6 +211,12 @@ globalDirectives.directive('confirmDialog', function() {
             if (showFilteredNewCollModal == true) {
                 scope.filteredColl = {};
                 scope.checkAll = false;
+                scope.totalDisplayed = 100;
+
+                scope.loadMore = function () {
+                    scope.totalDisplayed += 100;
+                };
+
                 if(scope.collId == null) {
                     IndexedDb.findAll(IndexedDb.STORES.CARD_STORE).then(function(data) {
                         scope.cards = data;

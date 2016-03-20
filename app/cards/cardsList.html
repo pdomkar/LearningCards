@@ -13,7 +13,7 @@
         <div class="row cardItem">
             <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
         </div>
-        <div class="row cardItem" ng-repeat="card in cl.cards | filter:searchText" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
+        <div class="row cardItem" ng-repeat="card in cl.cards | filter:searchText | limitTo:totalDisplayed" ng-class="{'hidden-background': (card.hidden.toLowerCase() == 'true') }">
 
            <div class="pull-left">
                {{card.front}} | {{card.back}}
@@ -29,6 +29,7 @@
             </div>
 
         </div>
+        <button class="btn btn-default btn-xs" ng-click="loadMore()" ng-if="cl.cards.length>totalDisplayed"><b style="font-size:1.8rem;">Load more</b></button>
     </section>
 </section>
 <add-edit-card-modal add-edit-card-modal-mode="addEditCardModalMode" update-id="updateId" add-fce="add(newCard)" update-fce="update(newCard)" show-modal="showModal"></add-edit-card-modal>

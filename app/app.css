@@ -77,7 +77,7 @@ section.pagebodyList {
 	top: 5rem;
 	bottom: 0;
 	min-height: 2rem !important;
-	line-height: 2rem;
+	line-height: 2.2rem;
 	font-size: 1.6rem;
 	color: white;
 	overflow-y: auto;
@@ -172,7 +172,8 @@ html[dir="rtl"] section[role="region"] > header:first-child .icon-forward {
 }
 .iconText {
 	display: block;
-	margin-top:-5px;
+	margin-top:-8px;
+	font-size: 10px;
 }
 
 .bigger {
@@ -260,7 +261,7 @@ a.collectionListItem{
 	color: #fff;
 	height: 100%;
 	display:block;
-	width: calc(100% - 125px);
+	width: calc(100% - 115px);
 }
 a.collectionListItem div {
 	width: 100%;
@@ -279,6 +280,10 @@ div.row.cardItem {
 	margin:2px
 }
 
+div.cardItemRow {
+	display:block;
+	width: calc(100% - 180px);
+}
 div.settingsLeftText{
 	display:block;
 	width: calc(100% - 80px);
@@ -305,6 +310,10 @@ div.row.filterCollectionItem {
 	border-bottom:1px solid #ffa500;
 }
 
+div.collectionRow {
+	background: rgba(240, 240, 240, 0.05);
+	margin-bottom: -5px;
+}
 
 
 .yellow {

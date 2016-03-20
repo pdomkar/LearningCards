@@ -117,28 +117,6 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
         });
     };
 
-    $scope.updateColl = function(coll) {
-        IndexedDb.update(IndexedDb.STORES.COLLECTION_STORE, coll).then(function() {
-            //Update collectionName in cadrs in this collection
-            IndexedDb.findByProperty(IndexedDb.STORES.CARD_STORE, "collectionId", parseInt(coll.id)).then(function(data) {
-                for(var i = 0; i<data.length; i++) {
-                    data[i].collectionName = coll.name;
-                    IndexedDb.update(IndexedDb.STORES.CARD_STORE, data[i]).then(function() {
-                    }, function(err) {
-                        $window.alert(err);
-                    });
-                }
-
-            }, function(err) {
-                $window.alert(err);
-            });
-            $scope.editCollModalMode = "update";
-            $scope.getById($routeParams.id);
-            $scope.refreshList();
-        }, function(err) {
-            $window.alert(err);
-        });
-    };
 
     $scope.$watch("cd.cardsToStudy",
         function ( newValue, oldValue ) {
