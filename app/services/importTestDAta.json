@@ -1,0 +1,55 @@
+{
+  "collection": {
+    "name": "TestImportData",
+    "description": "TestImportData desc",
+    "hidden": "false"
+  },
+  "cards": [
+    {
+      "front": "Test1",
+      "back": "Test1-1",
+      "urlOfFrontImg": "",
+      "urlOfBackImg": "",
+      "collectionId": 1,
+      "collectionName": "tt",
+      "lastShow": null,
+      "nextShow": "01-01-1970",
+      "interval": 2,
+      "hidden": "false",
+      "dirty": "false",
+      "ef": 2.5,
+      "numberOfIteration": 1
+    },
+    {
+      "front": "Test2",
+      "back": "Test2",
+      "urlOfFrontImg": "",
+      "urlOfBackImg": "",
+      "collectionId": 1,
+      "collectionName": "tt",
+      "lastShow": null,
+      "nextShow": "01-01-1970",
+      "interval": 2,
+      "hidden": "false",
+      "dirty": "false",
+      "ef": 2.5,
+      "numberOfIteration": 1
+    }
+  ],
+  "settings": {
+    "id": 1,
+    "playVoiceText": "true",
+    "languageOfVoice": "en/en",
+    "typeOfVoice": "f2",
+    "volumeOfVoice": 100,
+    "displayAnswer": "false",
+    "displayAnswerByRepeating": "false",
+    "limitTAnswer": "false",
+    "maximalAnswerTime": 60,
+    "showAnswerTime": "false",
+    "limitTAnswerByRepeating": "false",
+    "maximalAnswerTimeByRepeating": 60,
+    "showAnswerTimeByRepeating": "false",
+    "filteringCards": "true"
+  }
+}
