@@ -22,11 +22,6 @@ $ct-series-colors: (#d70206, #F05B4F, #F4C63D, #d17905) !default;
     border-radius: 1em;
   }
 
-
-  .ct-legend-inline {
-
-  }
-
   @for $i from 0 to length($ct-series-colors) {
     .ct-series-#{$i}::before {
       background-color: nth($ct-series-colors, $i + 1);

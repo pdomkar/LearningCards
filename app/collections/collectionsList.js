@@ -118,6 +118,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
         });
     };
 
+
     $scope.init = function(){
         IndexedDb.open().then(function(){
             IndexedDb.getGlobalSettings().then(function (response) {
@@ -127,6 +128,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
                 $window.alert(err);
             });
         }, function(err) {
+            console.log(err);
             console.log("not open db");
         });
     };

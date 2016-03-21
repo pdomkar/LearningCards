@@ -5,11 +5,11 @@ $( document ).ready(function() {
       var sidebar = $('.sidebar');
       var expanded = (sidebar.attr("aria-expanded") === "true");
       if (!expanded) {
-         spanIcon.removeClass("icon icon-menu").addClass("icon icon-forward");
+         spanIcon.removeClass("icon icon-menu").addClass("icon icon-back");
          principal.attr("aria-expanded", "false");
          sidebar.attr("aria-expanded", "true");
       }else {
-         spanIcon.removeClass("icon icon-forward").addClass("icon icon-menu");
+         spanIcon.removeClass("icon icon-back").addClass("icon icon-menu");
          principal.attr("aria-expanded", "true");
          sidebar.attr("aria-expanded", "false");
       }

@@ -1,6 +1,6 @@
 html, body {
-	margin: 0px;
-	padding: 0px;;
+	margin: 0;
+	padding: 0;
 }
 
 .modal .close {
@@ -25,7 +25,7 @@ form.addEditModal > section li {
 form.addEditModal > section > p > input[type="text"] {
 	color: #000;
 }
-.pointer { cursor: pointer; cursor: hand; }
+.pointer { cursor: pointer; }
 
 .addEditModal input.ng-invalid.ng-touched {
 	border: 2px solid #FA787E;
@@ -64,7 +64,7 @@ section.pagebodySettings {
 	left: 0;
 	right: 0;
 	top: 5rem;
-	bottom: 0rem;
+	bottom: 0;
 	font-size: 1.4rem;
 	color: #fff;
 	overflow-y: auto;
@@ -78,7 +78,7 @@ section.pagebodyList {
 	bottom: 0;
 	min-height: 2rem !important;
 	line-height: 2.2rem;
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	color: white;
 	overflow-y: auto;
 	padding: 5px;
@@ -145,31 +145,7 @@ a.unslider-arrow-my.next{
 	float: right;
 }
 
-form[role="dialog"][data-type="confirm"] > section {
-	overflow: auto !important;
-}
 
-form[role="dialog"][data-type="confirm"] header.dialogHeader {
-	display: block;
-	width: 100%;
-	background-image: url(css/images/header.png);
-}
-form[role="dialog"][data-type="confirm"] header.dialogHeader h1 {
-	font-weight: bold;
-	font-size: 2rem;
-	line-height: 2.4em;
-}
-
-html[dir="ltr"] section[role="region"] > header:first-child .icon-forward {
-	background-image: url(bower_components/building-blocks/style/headers/images/icons/right.png);
-}
-html[dir="rtl"] section[role="region"] > header:first-child .icon-forward {
-	background-image: url(bower_components/building-blocks/style/headers/images/icons/left.png);
-}
-
-[data-icon]:before, .ligature-icons {
-	font-size: 22px !important;
-}
 .iconText {
 	display: block;
 	margin-top:-8px;
@@ -180,7 +156,7 @@ html[dir="rtl"] section[role="region"] > header:first-child .icon-forward {
 	font-size: 1.6rem !important;
 }
 p {
-	margin: 0px 0px 2px !important;
+	margin: 0 0 2px !important;
 }
 
 .hidden-background {
@@ -253,8 +229,8 @@ a:hover.btnRepeatCards {
 	right: 0 !important;
 	bottom: 4.5rem !important;
 	left: 0 !important;
-	 visibility: visible !important;
-	 overflow: visible !important;
+	visibility: visible !important;
+	overflow: visible !important;
 }
 
 a.collectionListItem{
@@ -269,7 +245,7 @@ a.collectionListItem div {
 a.collectionListItem div.oneRow {
 	width: 100%;
 	height: 2rem;
-	line-height: 3.2rem;
+	/*line-height: 3.2rem;*/
 }
 a:hover.collectionListItem,a:active.collectionListItem{
 	color: #fff;
@@ -312,9 +288,34 @@ div.row.filterCollectionItem {
 
 div.collectionRow {
 	background: rgba(240, 240, 240, 0.05);
-	margin-bottom: -5px;
+	/*margin-bottom: -5px;*/
 }
 
+form[role="dialog"][data-type="confirm"] > section {
+	overflow: auto !important;
+}
+
+form[role="dialog"][data-type="confirm"] header.dialogHeader {
+	display: block;
+	width: 100%;
+	background-image: url(css/images/header.png);
+}
+form[role="dialog"][data-type="confirm"] header.dialogHeader h1 {
+	font-weight: bold;
+	font-size: 2rem;
+	line-height: 2.4em;
+}
+
+html[dir="ltr"] section[role="region"] > header:first-child .icon-forward {
+	background-image: url(bower_components/building-blocks/style/headers/images/icons/right.png);
+}
+html[dir="rtl"] section[role="region"] > header:first-child .icon-forward {
+	background-image: url(bower_components/building-blocks/style/headers/images/icons/left.png);
+}
+
+[data-icon]:before, .ligature-icons {
+	font-size: 22px !important;
+}
 
 .yellow {
 	background-color: #FFFF00;

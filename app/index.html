@@ -2,32 +2,33 @@
 <html dir="ltr" ng-app="lCApp">
 <head>
   <meta charset="utf-8">
-  <title>Learning Cards</title>
+  <title>FlashCards</title>
   <meta name="description" content="Application for learning using cards">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="images/fcards-icon-60.png" />
+
+  <link rel="stylesheet" href="bower_components/building-blocks/style/headers.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/layout.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/input_areas.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/buttons.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/confirm.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/switches.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/building-blocks/style/seekbars.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/unslider/dist/css/unslider.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/gaia-icons/fxos-icons.css" type="text/css">
+  <link rel="stylesheet" href="css/toggle-switches.css" type="text/css">
+  <link rel="stylesheet" href="css/principal.css" type="text/css">
+  <link rel="stylesheet" href="css/header.css" type="text/css">
+  <link rel="stylesheet" href="css/sidebar.css" type="text/css">
+  <link rel="stylesheet" href="css/menuaction.css" type="text/css">
+  <link rel="stylesheet" href="css/menulist.css" type="text/css">
+  <link rel="stylesheet" href="css/toolbar.css" type="text/css">
+  <link rel="stylesheet" href="css/pagebody.css" type="text/css">
+
   <link href="app.css" rel="stylesheet" type="text/css">
   <link href="css/style.min.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/headers.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/layout.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/input_areas.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/buttons.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/confirm.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/switches.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/seekbars.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/building-blocks/style/tabs.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="bower_components/unslider/dist/css/unslider.css" rel="stylesheet" type="text/css">
-
-  <link rel="stylesheet" type="text/css" href="css/toggle-switches.css">
-  <link rel="stylesheet" type="text/css" href="css/principal.css">
-  <link rel="stylesheet" type="text/css" href="css/header.css">
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-  <link rel="stylesheet" type="text/css" href="css/menuaction.css">
-  <link rel="stylesheet" type="text/css" href="css/menulist.css">
-  <link rel="stylesheet" type="text/css" href="css/toolbar.css">
-  <link rel="stylesheet" type="text/css" href="css/pagebody.css">
-
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/unslider/dist/js/unslider-min.js"></script>
@@ -35,11 +36,16 @@
   <script src="bower_components/jquery.event.swipe/js/jquery.event.swipe.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/gaia-icons/gaia-icons.js"></script>
+  <script src="bower_components/gaia-icons/fxos-icons.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/moment/min/moment.min.js"></script>
-  <script type="text/javascript" src="bower_components/filepicker-js/filepicker.js"></script>
+  <script src="bower_components/chartist/dist/chartist.min.js"></script>
   <script type="text/javascript" src="js/mespeak/mespeak.js"></script>
+  <script type="text/javascript" src="js/design/sidebar.js"></script>
+  <script type="text/javascript" src="js/design/menulist.js"></script>
+  <script type="text/javascript" src="js/design/toolbar.js"></script>
+  <script type="text/javascript" src="js/design/pagebody.js"></script>
+
   <script src="services/IndexedDb.js"></script>
   <script src="services/Import.js"></script>
   <script src="app.js"></script>
@@ -55,19 +61,6 @@
   <script src="statistics/statistics.js"></script>
   <script src="collectionStatistics/collectionStatistics.js"></script>
   <script src="collection/collectionDetail.js"></script>
-  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-  <script type="text/javascript" src="js/applait.finder.min.js"></script>
-  <script type="text/javascript" src="js/design/sidebar.js"></script>
-  <script type="text/javascript" src="js/design/menulist.js"></script>
-  <script type="text/javascript" src="js/design/toolbar.js"></script>
-  <script type="text/javascript" src="js/design/pagebody.js"></script>
-
-
-  <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css">
-  <script src="bower_components/chartist/dist/chartist.min.js"></script>
-
-  <script src="bower_components/Chart.js/Chart.min.js"></script>
-
 
 </head>
 <body>

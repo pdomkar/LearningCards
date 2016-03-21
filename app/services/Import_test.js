@@ -83,14 +83,6 @@ describe('import test', function () {
         expect(initData.getPath()).toBe("another.json");
     });
 
-    //it('load Json from path', function () {
-    //    //expect(initData.getJson()).toEqual({});
-    //    //
-    //    //initData.loadJson();
-    //    //console.log(initData.getJson());
-    //    //expect(initData.getJson()).not.toEqual({});
-    //});
-
     it('getCollection', function () {
         initData.setJson(data);
         expect(initData.getCollection()).toEqual({

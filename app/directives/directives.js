@@ -60,7 +60,6 @@ globalDirectives.directive('confirmDialog', function() {
         };
 
         scope.add = function(card) {
-            console.log(card);
             scope.addFce({newCard: card});
             scope.showModal = false;
             scope.addEditCardModalMode = "";

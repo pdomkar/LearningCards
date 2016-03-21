@@ -5,12 +5,12 @@
             <h1 ng-if="addEditCollModalMode == 'update'">Edit collection</h1>
         </header>
         <p>
-            <input type="text" placeholder="Name" name="name" data-ng-model="coll.name" required="" ng-maxlength="50" style="margin-top:0.5rem;"/>
+            <input type="text" placeholder="Name" name="name" data-ng-model="coll.name" required="" ng-maxlength="50" style="margin-top:0.5rem;" />
             <span ng-show="addEditModal.$submitted || addEditModal.name.$dirty" style="margin: 0 0 1rem 1rem">
                 <span ng-show="addEditModal.name.$error.required" class="colorRed" style="margin-top:-1rem;display: block;">Fill name of collection</span>
                 <span ng-show="addEditModal.name.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 50 character</span>
             </span>
-            <input type="text" placeholder="Description" name="description" data-ng-model="coll.description" ng-maxlength="250" style="margin-top:0.5rem;"/>
+            <input type="text" placeholder="Description" name="description" data-ng-model="coll.description" ng-maxlength="250" style="margin-top:0.5rem;" />
             <span ng-show="addEditModal.$submitted || addEditModal.description.$dirty" style="margin: 0 0 1rem 1rem">
                 <span ng-show="addEditModal.description.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 250 character</span>
             </span>
@@ -20,6 +20,5 @@
         <button ng-click="cancel()">Cancel</button>
         <button class="recommend" ng-click="add(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'add'">Add</button>
         <button class="recommend" ng-click="update(coll)" ng-disabled="addEditModal.$invalid" ng-if="addEditCollModalMode == 'update'">Edit</button>
-
     </menu>
 </form>

@@ -1,9 +1,8 @@
 {
-  "name": "LearningCards",
+  "name": "FlashCards",
   "private": true,
   "version": "0.1.0",
   "description": "Application for learning using cards",
-  "repository": "https://github.com/pdomkar/LearningCards",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",

@@ -58,7 +58,7 @@ statistics.controller('StatisticsCtrl', ['$scope', '$routeParams', '$window', '$
             generateBarGraph(response, 27);
 
             var legendBar = $('.ct-legend.legend-bar');
-            $.each(['Again','Hard', 'Good', 'Easy'], function(i, val) { //TODO asi potreba přidat nejaky json s moznostmi tlačítek, a pro ne barvy a legendy
+            $.each(['Again','Hard', 'Good', 'Easy'], function(i, val) {
                 $('<li />')
                     .addClass('ct-series-' + i)
                     .html('<strong>' + val + '</strong>')

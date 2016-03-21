@@ -1,7 +1,5 @@
 'use strict';
-/**
- * Created by Petr on 22. 11. 2015.
- */
+
 angular.module('IndexedDbServices', ['ImportServices'])
     .config(['$provide', function ($provide) {
         $provide.constant('indexedDB', window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB);
@@ -22,8 +20,8 @@ angular.module('IndexedDbServices', ['ImportServices'])
             COLLECTION_SETTINGS_STORE: COLLECTION_SETTINGS_STORE,
             STATISTICS_ANSWERS_STORE: STATISTICS_ANSWERS_STORE
         };
-
-        var initDataColls = ["initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json", "initData/en-cs-1-6.json", "initData/en-cs-2-0.json", "initData/en-cs-2-1.json", "initData/en-cs-2-2.json", "initData/en-cs-2-3.json", "initData/en-cs-2-4.json", "initData/en-cs-2-5.json", "initData/en-cs-2-6.json", "initData/en-cs-3-0.json", "initData/en-cs-3-1.json", "initData/en-cs-3-2.json", "initData/en-cs-3-3.json", "initData/en-cs-3-4.json", "initData/en-cs-3-5.json", "initData/en-cs-3-6.json", "initData/en-cs-3-7.json", "initData/en-cs-3-8.json", "initData/en-cs-4-0.json", "initData/en-cs-4-1.json", "initData/en-cs-4-2.json", "initData/en-cs-4-3.json", "initData/en-cs-4-4.json", "initData/en-cs-4-5.json", "initData/en-cs-4-6.json", "initData/en-cs-4-7.json", "initData/en-cs-4-8.json", "initData/en-cs-5-0.json", "initData/en-cs-5-1.json", "initData/en-cs-5-2.json", "initData/en-cs-5-3.json", "initData/en-cs-5-4.json", "initData/en-cs-5-5.json", "initData/en-cs-5-6.json", "initData/en-cs-5-7.json", "initData/en-cs-5-8.json"];
+                //"initData/en-cs-3-0.json", "initData/en-cs-3-1.json", "initData/en-cs-3-2.json", "initData/en-cs-3-3.json", "initData/en-cs-3-4.json", "initData/en-cs-3-5.json", "initData/en-cs-3-6.json", "initData/en-cs-3-7.json", "initData/en-cs-3-8.json", "initData/en-cs-4-0.json", "initData/en-cs-4-1.json", "initData/en-cs-4-2.json", "initData/en-cs-4-3.json", "initData/en-cs-4-4.json", "initData/en-cs-4-5.json", "initData/en-cs-4-6.json", "initData/en-cs-4-7.json", "initData/en-cs-4-8.json", "initData/en-cs-5-0.json", "initData/en-cs-5-1.json", "initData/en-cs-5-2.json", "initData/en-cs-5-3.json", "initData/en-cs-5-4.json", "initData/en-cs-5-5.json", "initData/en-cs-5-6.json", "initData/en-cs-5-7.json", "initData/en-cs-5-8.json",
+        var initDataColls = ["initData/de-en-1.json","initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json", "initData/en-cs-1-6.json", "initData/en-cs-2-0.json", "initData/en-cs-2-1.json", "initData/en-cs-2-2.json", "initData/en-cs-2-3.json", "initData/en-cs-2-4.json", "initData/en-cs-2-5.json", "initData/en-cs-2-6.json", "initData/fr-cs-barvy.json", "initData/fr-cs-cisla.json", "initData/fr-cs-jidlo.json", "initData/fr-cs-napoje.json", "initData/fr-cs-ovoce.json", "initData/fr-cs-zelenina.json", "initData/fr-cs-konverzace.json", "initData/fr-cs-zvirata.json", "initData/fr-cs-obleceni.json", "initData/de-cs-barvy.json", "initData/de-cs-cisla.json", "initData/de-cs-jidlo.json", "initData/de-cs-napoje.json", "initData/de-cs-ovoce.json", "initData/de-cs-zelenina.json", "initData/de-cs-konverzace.json", "initData/de-cs-zvirata.json", "initData/de-cs-obleceni.json"];
 
         service.open = function (init) {
 
@@ -36,7 +34,6 @@ angular.module('IndexedDbServices', ['ImportServices'])
 
             request.onupgradeneeded = function (e) {
                 db = e.target.result;
-
                 e.target.transaction.onerror = indexedDB.onerror;
 
                 if (db.objectStoreNames.contains(COLLECTION_STORE)) {
@@ -172,7 +169,8 @@ angular.module('IndexedDbServices', ['ImportServices'])
                 $rootScope.$apply();
             };
 
-            request.onerror = function () {
+            request.onerror = function (e) {
+                console.log(e);
                 deferred.reject();
             };
 
@@ -339,7 +337,6 @@ angular.module('IndexedDbServices', ['ImportServices'])
                         data.push(cursor.value);
                         cursor.continue();
                     }
-
                 };
 
                 cursorRequest.onerror = function (e) {
