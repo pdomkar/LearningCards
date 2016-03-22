@@ -16,7 +16,5 @@
 	"type": "privileged",
     "permissions": {
         "systemXHR": { "description": "Required to make Ajax Calls over the Network" },
-        "device-storage:sdcard":{ "access": "readwrite" },
-        "device-storage:pictures":{ "access": "readwrite" }
     }
 }
