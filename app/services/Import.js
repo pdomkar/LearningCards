@@ -1,7 +1,5 @@
 'use strict';
-/**
- * Created by Petr on 22. 11. 2015.
- */
+
 angular.module('ImportServices', [])
     .config(['$provide', function ($provide) {
     }])

@@ -35,29 +35,29 @@ globalDirectives.directive('confirmDialog', function() {
             scope.card = {};
         };
 
-        scope.showImages = function() {
-
-            var pickImageActivity = new MozActivity({
-                name: "pick",
-                data: {
-                    type: ["image/*"]
-                }
-            });
-
-            pickImageActivity.onsuccess = function() {
-                if (this.result.blob.type.indexOf("image") != -1) {
-                    console.log(this.result);
-                    scope.card.urlOfFrontImg = this.result.name;
-                }
-
-            };
-
-            pickImageActivity.onerror = function() {
-                alert("Cannot pick the image");
-                console.log(this.result);
-            };
-
-        };
+        //scope.showImages = function() {
+        //
+        //    var pickImageActivity = new MozActivity({
+        //        name: "pick",
+        //        data: {
+        //            type: ["image/*"]
+        //        }
+        //    });
+        //
+        //    pickImageActivity.onsuccess = function() {
+        //        if (this.result.blob.type.indexOf("image") != -1) {
+        //            console.log(this.result);
+        //            scope.card.urlOfFrontImg = this.result.name;
+        //        }
+        //
+        //    };
+        //
+        //    pickImageActivity.onerror = function() {
+        //        alert("Cannot pick the image");
+        //        console.log(this.result);
+        //    };
+        //
+        //};
 
         scope.add = function(card) {
             scope.addFce({newCard: card});

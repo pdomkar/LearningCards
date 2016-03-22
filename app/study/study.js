@@ -25,7 +25,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
     };
 
     $scope.evaluateCard = function (grade) {
-        console.log("OLD interval = " + $scope.card.interval);
+        //console.log("OLD interval = " + $scope.card.interval);
         if ($scope.card.interval < 6) {
             if (grade >= 3) {
                 var nextShowDay = moment().add(1, "d");
@@ -34,7 +34,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
             } else {
                 $scope.card.nextShow = moment().add(5, "m").toDate();
             }
-            console.log(" next Show = " + $scope.card.nextShow);
+            //console.log(" next Show = " + $scope.card.nextShow);
         } else {
             if (grade == 0) {
                 $scope.card.nextShow = moment().add(5, "m").toDate();
@@ -45,12 +45,12 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
                 } else if (grade == 1) {
                     fraction = 1 / 3;
                 }
-                console.log("fraction = " + fraction);
+                //console.log("fraction = " + fraction);
                 var nextShowDay = moment().add(Math.round($scope.card.interval * fraction), "d");
                 nextShowDay.set({'hour': 0, 'minute': 0, 'second': 0});
                 $scope.card.nextShow = nextShowDay.toDate();
             }
-            console.log(" next Show = " + $scope.card.nextShow);
+            //console.log(" next Show = " + $scope.card.nextShow);
         }
 
 
@@ -80,10 +80,10 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
         }
 
         $scope.card.lastShow = moment().toDate();
-        console.log("n of itera = " + $scope.card.numberOfIteration);
-        console.log("interval = " + $scope.card.interval);
-        console.log(" last Show = " + $scope.card.lastShow);
-        console.log("new ef = " + $scope.card.ef);
+        //console.log("n of itera = " + $scope.card.numberOfIteration);
+        //console.log("interval = " + $scope.card.interval);
+        //console.log(" last Show = " + $scope.card.lastShow);
+        //console.log("new ef = " + $scope.card.ef);
 
 
         IndexedDb.update(IndexedDb.STORES.CARD_STORE, $scope.card).then(function () {

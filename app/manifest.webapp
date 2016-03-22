@@ -1,5 +1,5 @@
 {
-    "version":"0.1",
+    "version":"0.9.0",
 	"name": "FlashCards",
     "description": "Application for learning using cards",
     "launch_path": "/index.html",
