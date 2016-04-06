@@ -14,7 +14,7 @@
 
         <div id="cardsType" class="pagebody" aria-expanded="true" style="top: 2rem;">
             <div class="container">
-                <div class="row">
+                <div class="row" ng-if="isTwoOrHigherVer()">
                     <ul class="ct-legend ct-legend-inline legend-pie"></ul>
                     <div class="ct-chart" id="chart1"></div>
                 </div>
@@ -31,7 +31,6 @@
                     <li><div class="ct-chart" id="chart2-6"  style="display: inline-block;width:100%; background: #ddd;"></div></li>
                 </ul>
             </div>
-
         </div>
 
      </section>

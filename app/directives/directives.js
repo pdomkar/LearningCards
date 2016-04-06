@@ -73,34 +73,34 @@ globalDirectives.directive('confirmDialog', function() {
             scope.card = {};
         };
 
-        scope.removeFrontImg = function() {
-            IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
-                data.urlOfFrontImg = '';
-                IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
-                    if (scope.addEditCardModalMode == "update") {
-                        scope.card.urlOfFrontImg = '';
-                    }
-                }, function(err) {
-                    $window.alert(err);
-                 });
-            }, function(err) {
-                $window.alert(err);
-            });
-        };
-        scope.removeBackImg = function() {
-            IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
-                data.urlOfBackImg = '';
-                IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
-                    if (scope.addEditCardModalMode == "update") {
-                        scope.card.urlOfBackImg = '';
-                    }
-                }, function(err) {
-                    $window.alert(err);
-                });
-            }, function(err) {
-                $window.alert(err);
-            });
-        };
+        //scope.removeFrontImg = function() {
+        //    IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
+        //        data.urlOfFrontImg = '';
+        //        IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
+        //            if (scope.addEditCardModalMode == "update") {
+        //                scope.card.urlOfFrontImg = '';
+        //            }
+        //        }, function(err) {
+        //            $window.alert(err);
+        //         });
+        //    }, function(err) {
+        //        $window.alert(err);
+        //    });
+        //};
+        //scope.removeBackImg = function() {
+        //    IndexedDb.getById(IndexedDb.STORES.CARD_STORE, scope.updateId).then(function(data) {
+        //        data.urlOfBackImg = '';
+        //        IndexedDb.update(IndexedDb.STORES.CARD_STORE, data).then(function(dataIns) {
+        //            if (scope.addEditCardModalMode == "update") {
+        //                scope.card.urlOfBackImg = '';
+        //            }
+        //        }, function(err) {
+        //            $window.alert(err);
+        //        });
+        //    }, function(err) {
+        //        $window.alert(err);
+        //    });
+        //};
 
 
         scope.$watch('addEditCardModalMode', function(addEditCardModalMode) {

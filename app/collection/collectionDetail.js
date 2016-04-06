@@ -52,6 +52,8 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
         card.ef = 2.5;
         card.numberOfIteration = 0;
         card.hidden = "false";
+        card.urlOfFrontImg = "";
+        card.urlOfBackImg = "";
         IndexedDb.add(IndexedDb.STORES.CARD_STORE, card).then(function() {
             $scope.refreshList();
         }, function(err) {
@@ -139,6 +141,20 @@ collectionDetail.controller('CollectionDetailCtrl', ['$scope', '$routeParams', '
             $scope.findCardsToStudy($routeParams.id);
         }
     );
+
+    $scope.isTwoOrHigherVer = function() {
+        var userAgent = $window.navigator.userAgent;
+        var userAgentBySpace= userAgent.split(" ");
+        var lastTextBySlash =userAgentBySpace[userAgentBySpace.length-1].split("/");
+        var version =parseFloat(lastTextBySlash[lastTextBySlash.length-1]);
+
+        if((userAgent.indexOf("Gecko") > -1) && (userAgent.indexOf("Mobile") > -1)) {
+            return (version>32.0 && lastTextBySlash[0] == "Firefox" );
+        } else {
+            return true;
+        }
+
+    };
 
     $scope.init = function() {
         IndexedDb.open().then(function(){

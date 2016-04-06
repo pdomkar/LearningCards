@@ -9,7 +9,7 @@
     </header>
     <section class="pagebodyList">
         <div class="row cardItem" ng-show="settings.filteringCollections == 'true'">
-            <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search card"/>
+            <input type="text" class="pull-left" id="search" ng-model="searchText" placeholder="Search collection"/>
         </div>
        <div class="row cardItem" ng-repeat="collection in cl.collections | filter:searchText">
             <a ng-href="#/collections/{{collection.id}}" class="collectionListItem">
@@ -38,7 +38,7 @@
         <a ng-href="#/cards/">Display all cards</a>
         <a href="" ng-click="showFilteredNewCollModal()">Create filtered collection</a>
         <a ng-href="#/settings/">Settings</a>
-        <a ng-href="#/statistics/">Statistics</a>
+        <a ng-href="#/statistics/" ng-if="isTwoOrHigherVer()">Statistics</a>
     </menu>
 </section>
 

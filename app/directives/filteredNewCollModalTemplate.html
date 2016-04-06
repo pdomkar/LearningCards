@@ -1,8 +1,8 @@
 <form role="dialog" data-type="confirm" name="filteredNewCollModal" class="addEditModal" ng-show='showFilteredNewCollModal' novalidate="">
     <section>
         <header class="dialogHeader">
-            <h1 data-ng-if="collId == null">Create new collection from cards</h1>
-            <h1 data-ng-if="collId != null">Create new collection from collection</h1>
+            <h1 data-ng-if="collId == null">Create collection from cards</h1>
+            <h1 data-ng-if="collId != null">Create collection from collection</h1>
         </header>
         <p>
             <input type="text" placeholder="Name" data-ng-model="filteredColl.name" name="name" required="" ng-maxlength="50" />
@@ -15,7 +15,7 @@
                 <span ng-show="filteredNewCollModal.description.$error.maxlength" class="colorRed" style="margin-top:-1rem;display: block;">Maximal length is 250 character</span>
             </span>
 
-            <div class="switch" style="width:100%; margin-top:0;">
+            <div class="switch" style="width:100%; margin-top:0; z-index: 0;">
                 <input type="radio" class="switch-input" data-ng-model="filteredColl.reverseSide" name="reverseSide" value="false" id="reverseSideFalse" />
                 <label for="reverseSideFalse" style="width:50%;" class="switch-label switch-label-off">Original side</label>
                 <input type="radio" class="switch-input" data-ng-model="filteredColl.reverseSide" name="reverseSide" value="true" id="reverseSideTrue" />

@@ -132,6 +132,20 @@ statistics.controller('StatisticsCtrl', ['$scope', '$routeParams', '$window', '$
         });
     }
 
+    $scope.isTwoOrHigherVer = function() {
+        var userAgent = $window.navigator.userAgent;
+        var userAgentBySpace= userAgent.split(" ");
+        var lastTextBySlash =userAgentBySpace[userAgentBySpace.length-1].split("/");
+        var version =parseFloat(lastTextBySlash[lastTextBySlash.length-1]);
+
+        if((userAgent.indexOf("Gecko") > -1) && (userAgent.indexOf("Mobile") > -1)) {
+            return (version>32.0 && lastTextBySlash[0] == "Firefox" );
+        } else {
+            return true;
+        }
+
+    };
+
     $scope.initGraphSlider = function () {
         $(function () {
             // wait till load event fires so all resources are available
