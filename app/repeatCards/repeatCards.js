@@ -7,6 +7,7 @@ repeatCards.controller('RepeatCardsCtrl', ['$scope', '$routeParams', '$window', 
     $scope.collectionId = $routeParams.id;
     $scope.cards = [];
     $scope.displayAnswer = false;
+    $scope.onlyAnswer = false;
     $scope.timer = null;
 
     const CARD_GRADE = { // PREMISTIt do definice konstatnt
@@ -101,16 +102,23 @@ repeatCards.controller('RepeatCardsCtrl', ['$scope', '$routeParams', '$window', 
     $scope.countdown = function () {
         $scope.countdownRef = $timeout(function () {
             if ($scope.timer <= 0) {
-                moveCard();
-                $scope.displayAnswer = false;
-                $scope.speakFrontCardText();
-                if ($scope.collectionSettings.limitTAnswerByRepeating.toLowerCase() == "true") {
-                    $scope.timer = $scope.collectionSettings.maximalAnswerTimeByRepeating;
-                    $scope.timer++;
-                }
+                $scope.onlyAnswer = true;
+                $timeout(function() {
+                    moveCard();
+                    $scope.displayAnswer = false;
+                    $scope.speakFrontCardText();
+                    if ($scope.collectionSettings.limitTAnswerByRepeating.toLowerCase() == "true") {
+                        $scope.timer = $scope.collectionSettings.maximalAnswerTimeByRepeating;
+                        $scope.timer++;
+                    }
+                    $scope.onlyAnswer = false;
+                    $scope.timer--;
+                    $scope.countdown();
+                }, 1500);
+            } else {
+                $scope.timer--;
+                $scope.countdown();
             }
-            $scope.timer--;
-            $scope.countdown();
         }, 1000);
     };
 

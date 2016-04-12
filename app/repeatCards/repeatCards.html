@@ -20,8 +20,8 @@
                 <!--<img ng-if="cards[0].urlOfFrontImg.length > 0" style="max-width: 80px;max-height: 80px;" src="{{cards[0].urlOfFrontImg}}" alt="Image not available">-->
                 <!--<img ng-if="cards[0].urlOfFrontImg.length == 0" style="max-width: 80px;max-height: 80px;" src="{{cards[0].urlOfFrontImg}}" alt="">-->
             </span>
-            <hr ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">
-            <span ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer">{{cards[0].back}}<br />
+            <hr ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer || onlyAnswer">
+            <span ng-show="(collectionSettings.displayAnswerByRepeating == 'true') || displayAnswer || onlyAnswer">{{cards[0].back}}<br />
                 <!--<img ng-if="cards[0].urlOfBackImg.length > 0" style="max-width: 80px;max-height: 80px;" src="{{cards[0].urlOfBackImg}}" alt="Image not available">-->
                 <!--<img ng-if="cards[0].urlOfBackImg.length == 0" style="max-width: 80px;max-height: 80px;" src="{{cards[0].urlOfBackImg}}" alt="">-->
             </span>

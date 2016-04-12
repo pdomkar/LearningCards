@@ -23,9 +23,16 @@ settings.controller('SettingsCtrl', ['$scope', '$routeParams', '$window', '$loca
         }
     }, true);
 
+    $scope.playTestVoice = function() {
+        meSpeak.loadVoice("js/mespeak/voices/" + $scope.settings.languageOfVoice + ".json", function() {
+            meSpeak.speak("Test voice", {volume: ($scope.settings.volumeOfVoice/100), variant: $scope.settings.typeOfVoice});
+        });
+    };
+
     $scope.init = function() {
         IndexedDb.open().then(function(){
             $scope.getGlobalSettings();
+            meSpeak.loadConfig("js/mespeak/mespeak_config.json");
         });
     }
 }]);

@@ -82,8 +82,8 @@ describe('my app', function () {
                browser.driver.sleep(1000);
                element(by.cssContainingText('a', 'Create filtered collection')).click();
 
-                waitForElement(element(by.cssContainingText('h1', 'Create new collection from cards')));
-                expect(element(by.cssContainingText('h1', 'Create new collection from cards')).isDisplayed()).toBe(true);
+                waitForElement(element(by.cssContainingText('h1', 'Create collection from cards')));
+                expect(element(by.cssContainingText('h1', 'Create collection from cards')).isDisplayed()).toBe(true);
 
                 waitForElement(element(by.model('filteredColl.name')));
                 waitForElement(element(by.model('filteredColl.description')));
@@ -352,8 +352,8 @@ describe('my app', function () {
                    browser.driver.sleep(1000);
                    element(by.cssContainingText('a', 'Create filtered collection')).click();
 
-                    waitForElement(element(by.cssContainingText('h1', 'Create new collection from collection')));
-                    expect(element(by.cssContainingText('h1', 'Create new collection from collection')).isDisplayed()).toBe(true);
+                    waitForElement(element(by.cssContainingText('h1', 'Create collection from collection')));
+                    expect(element(by.cssContainingText('h1', 'Create collection from collection')).isDisplayed()).toBe(true);
 
                     waitForElement(element(by.model('filteredColl.name')));
                     waitForElement(element(by.model('filteredColl.description')));

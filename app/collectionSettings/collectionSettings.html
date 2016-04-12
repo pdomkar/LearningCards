@@ -8,6 +8,9 @@
         <div class="row settingsItem">
             <div class="pull-left">Play text of card:</div>
             <div class="pull-right" style="margin-right: 2%; margin-top: -3px;">
+                <button class="btn-xs btn-info" style="width: auto; height: 3.5rem; margin-right:2rem; margin-bottom: 0.5rem;" data-ng-click="playTestVoice()" data-ng-show="collectionSettings.playVoiceText.toLowerCase() === 'true'">
+                    <span class="icon colorWhite" data-icon="sound-max" aria-label="speak test voice"></span>
+                </button>
                 <label class="pack-switch">
                     <input type="checkbox" data-ng-model="collectionSettings.playVoiceText" data-ng-true-value="'true'" data-ng-false-value="'false'">
                     <span></span>

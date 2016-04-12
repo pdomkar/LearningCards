@@ -24,9 +24,16 @@ collectionSettings.controller('CollectionSettingsCtrl', ['$scope', '$routeParams
         }
     }, true);
 
+    $scope.playTestVoice = function() {
+        meSpeak.loadVoice("js/mespeak/voices/" + $scope.collectionSettings.languageOfVoice + ".json", function() {
+            meSpeak.speak("Test voice", {volume: ($scope.collectionSettings.volumeOfVoice/100), variant: $scope.collectionSettings.typeOfVoice});
+        });
+    };
+
     $scope.init = function() {
         IndexedDb.open().then(function(){
             $scope.getCollectionSettings();
+            meSpeak.loadConfig("js/mespeak/mespeak_config.json");
         });
     }
 }]);

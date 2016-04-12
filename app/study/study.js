@@ -8,6 +8,7 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
     $scope.cards = [];
     $scope.card = null;
     $scope.displayAnswer = false;
+    $scope.onlyAnswer = false;
     $scope.timer = null;
 
     const CARD_GRADE = {
@@ -241,11 +242,16 @@ study.controller('StudyCtrl', ['$scope', '$routeParams', '$window', '$location',
     $scope.countdown = function () {
         $scope.countdownRef = $timeout(function () {
             if ($scope.timer <= 0) {
-                $scope.evaluateCard(0);
-                $scope.timer++;
+                $scope.onlyAnswer = true;
+                $timeout(function() {
+                    $scope.evaluateCard(0);
+                    $scope.timer++;
+                    $scope.onlyAnswer = false;
+                }, 1500);
+            } else {
+                $scope.timer--;
+                $scope.countdown();
             }
-            $scope.timer--;
-            $scope.countdown();
         }, 1000);
     };
 
