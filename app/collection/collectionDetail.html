@@ -62,7 +62,7 @@
     <menu class="menulist">
         <a ng-href="#/collections/{{cd.collectionDetail.id}}/hidden/" class="item">Display hidden cards</a>
         <a href="" ng-click="showFilteredNewCollModal()" class="item">Create filtered collection</a>
-        <a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" ng-if="isTwoOrHigherVer()" class="item">Collection statistics</a>
+        <a ng-href="#/collectionStatistics/{{cd.collectionDetail.id}}/" ng-if="isHigherThenTwo()" class="item">Collection statistics</a>
         <a ng-href="#/collectionSettings/{{cd.collectionDetail.id}}/" class="item">Collection settings</a>
     </menu>
 </section>

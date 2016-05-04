@@ -10,7 +10,7 @@ repeatCards.controller('RepeatCardsCtrl', ['$scope', '$routeParams', '$window', 
     $scope.onlyAnswer = false;
     $scope.timer = null;
 
-    const CARD_GRADE = { // PREMISTIt do definice konstatnt
+    const CARD_GRADE = {
         0: 'Again',
         3: 'Good'
     };

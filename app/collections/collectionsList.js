@@ -118,7 +118,7 @@ collectionsList.controller('CollectionsListCtrl', ['$scope', '$location', '$wind
         });
     };
 
-    $scope.isTwoOrHigherVer = function() {
+    $scope.isHigherThenTwo = function() {
         var userAgent = $window.navigator.userAgent;
         var userAgentBySpace= userAgent.split(" ");
         var lastTextBySlash =userAgentBySpace[userAgentBySpace.length-1].split("/");

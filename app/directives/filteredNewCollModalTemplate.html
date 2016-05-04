@@ -1,8 +1,7 @@
 <form role="dialog" data-type="confirm" name="filteredNewCollModal" class="addEditModal" ng-show='showFilteredNewCollModal' novalidate="">
     <section>
         <header class="dialogHeader">
-            <h1 data-ng-if="collId == null">Create collection from cards</h1>
-            <h1 data-ng-if="collId != null">Create collection from collection</h1>
+            <h1>Create filtered collection</h1>
         </header>
         <p>
             <input type="text" placeholder="Name" data-ng-model="filteredColl.name" name="name" required="" ng-maxlength="50" />

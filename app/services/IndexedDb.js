@@ -20,7 +20,6 @@ angular.module('IndexedDbServices', ['ImportServices'])
             COLLECTION_SETTINGS_STORE: COLLECTION_SETTINGS_STORE,
             STATISTICS_ANSWERS_STORE: STATISTICS_ANSWERS_STORE
         };
-                // "initData/en-cs-2-0.json", "initData/en-cs-2-1.json", "initData/en-cs-2-2.json", "initData/en-cs-2-3.json", "initData/en-cs-2-4.json", "initData/en-cs-2-5.json", "initData/en-cs-2-6.json", "initData/en-cs-3-0.json", "initData/en-cs-3-1.json", "initData/en-cs-3-2.json", "initData/en-cs-3-3.json", "initData/en-cs-3-4.json", "initData/en-cs-3-5.json", "initData/en-cs-3-6.json", "initData/en-cs-3-7.json", "initData/en-cs-3-8.json", "initData/en-cs-4-0.json", "initData/en-cs-4-1.json", "initData/en-cs-4-2.json", "initData/en-cs-4-3.json", "initData/en-cs-4-4.json", "initData/en-cs-4-5.json", "initData/en-cs-4-6.json", "initData/en-cs-4-7.json", "initData/en-cs-4-8.json", "initData/en-cs-5-0.json", "initData/en-cs-5-1.json", "initData/en-cs-5-2.json", "initData/en-cs-5-3.json", "initData/en-cs-5-4.json", "initData/en-cs-5-5.json", "initData/en-cs-5-6.json", "initData/en-cs-5-7.json", "initData/en-cs-5-8.json",
         var initDataColls = ["initData/de-en-1.json","initData/en-cs-1-1.json", "initData/en-cs-1-2.json", "initData/en-cs-1-3.json", "initData/en-cs-1-4.json", "initData/en-cs-1-5.json", "initData/en-cs-1-6.json", "initData/fr-cs-barvy.json", "initData/fr-cs-cisla.json", "initData/fr-cs-konverzace.json", "initData/de-cs-barvy.json", "initData/de-cs-cisla.json", "initData/de-cs-konverzace.json"];
 
         service.open = function (init) {
